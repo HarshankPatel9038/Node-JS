@@ -1,1 +1,1 @@
-module.exports.categoryControlller = require('./categories.controller')
+module.exports.categoryController = require('./categories.controller')

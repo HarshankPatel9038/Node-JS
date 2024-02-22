@@ -3,44 +3,26 @@ const route = express.Router();
 const joi = require('joi');
 const validate = require('../../middleware/validate');
 const { categoryValidation } = require('../../validation');
-const { categoryControlller } = require('../../controller');
+const { categoryController } = require('../../controller');
 
-route.get('/', (req, res) => {
-    console.log('Category Get Successfully');
-});
+route.get('/get-category',
+    validate(categoryValidation.getCategory),
+    categoryController.getCategories
+);
 
 route.post('/create-category',
     validate(categoryValidation.createCategory),
-    // (req, res) => {
-
-    //     let bodyData = req.body;
-    //     return res.status(200).json({
-    //         success: true,
-    //         data: bodyData,
-    //         message: 'Post Category Data Successfully'
-    //     });
-    // }
-    categoryControlller.createCategories
-
-
+    categoryController.createCategories
 );
 
-route.put('/:id',
-    validate(categoryValidation.createCategory),
-    (req, res) => {
-
-        let bodyData = req.body;
-        return res.status(200).json({
-            success: true,
-            data: bodyData,
-            message: 'Update Category Data Successfully'
-        });
-    }
+route.put('/update-category/:categoryId',
+    validate(categoryValidation.updateCategory),
+    categoryController.updateCategories
 );
 
-route.delete('/delete-category',
-    validate(categoryValidation.createCategory),
-    categoryControlller.deleteCategory
+route.delete('/delete-category/:categoryId',
+    validate(categoryValidation.deleteCategory),
+    categoryController.deleteCategories
 );
 
 module.exports = route;
