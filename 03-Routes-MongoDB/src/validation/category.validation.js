@@ -1,14 +1,5 @@
 const Joi = require("joi");
 
-const getCategory = {
-    body: {
-        name: Joi.string().required().trim(),
-        description: Joi.string().required().trim(),
-        image: Joi.string().required().trim(),
-        isActive: Joi.boolean()
-    }
-}
-
 const createCategory = {
     body: {
         name: Joi.string().required().trim(),
@@ -18,12 +9,14 @@ const createCategory = {
 }
 
 const updateCategory = {
-    params: {
-        categoryId: Joi.string().trim(),
+    body: {
         name: Joi.string().trim(),
         description: Joi.string().trim(),
         image: Joi.string().trim(),
         isActive: Joi.boolean()
+    },
+    params: {
+        categoryId: Joi.string().required()
     }
 };
 
@@ -35,7 +28,6 @@ const deleteCategory = {
 
 
 module.exports = {
-    getCategory,
     createCategory,
     updateCategory,
     deleteCategory

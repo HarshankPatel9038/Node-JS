@@ -5,10 +5,26 @@ const validate = require('../../middleware/validate');
 const { categoryValidation } = require('../../validation');
 const { categoryController } = require('../../controller');
 
-route.get('/get-category',
-    validate(categoryValidation.getCategory),
+// =============== GET ===============
+// ========= 01 =========
+route.get('/list-category',
     categoryController.getCategories
 );
+
+// ========= 02 =========
+// route.get('/get-category/:categoryId',
+//     categoryController.getCategories
+// );
+
+// ========= 03 =========
+// route.get('/count-active',
+//     categoryController.getCategories
+// );
+
+// ========= 04 =========
+// route.get('/inactive',
+//     categoryController.getCategories
+// );
 
 route.post('/create-category',
     validate(categoryValidation.createCategory),
