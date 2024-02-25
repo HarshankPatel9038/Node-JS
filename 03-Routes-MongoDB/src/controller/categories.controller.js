@@ -3,17 +3,17 @@ const Categories = require("../models/categories.model");
 const getCategories = async (req, res) => {
 
     try {
-        // ========= 01 =========
+        // ========= 01 list-category =========
         const category = await Categories.find();
 
-        // ========= 02 =========
+        // ========= 02 get-category By Id =========
         // const categoryId = req.params.categoryId;
-        // const category = await Categories.findById(categoryId);
         // if (!categoryId) {
         //     return res.status(400).json({ message: 'Category ID is required' });
         // }
+        // const category = await Categories.findById(categoryId);
 
-        // ========= 03 =========
+        // ========= 03 count-active =========
         // const category = await Categories.aggregate([
         //     {
         //         $match: {
@@ -25,7 +25,7 @@ const getCategories = async (req, res) => {
         //     }
         // ]);
 
-        // ========= 04 =========
+        // ========= 04 inactive =========
         // const category = await Categories.aggregate([
         //     {
         //         $match: {

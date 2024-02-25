@@ -1,27 +1,26 @@
 const express = require('express');
 const route = express.Router();
-const joi = require('joi');
 const validate = require('../../middleware/validate');
 const { categoryValidation } = require('../../validation');
 const { categoryController } = require('../../controller');
 
 // =============== GET ===============
-// ========= 01 =========
+// ========= 01 list-category =========
 route.get('/list-category',
     categoryController.getCategories
 );
 
-// ========= 02 =========
+// ========= 02 get-category By Id =========
 // route.get('/get-category/:categoryId',
 //     categoryController.getCategories
 // );
 
-// ========= 03 =========
+// ========= 03 count-active =========
 // route.get('/count-active',
 //     categoryController.getCategories
 // );
 
-// ========= 04 =========
+// ========= 04 inactive =========
 // route.get('/inactive',
 //     categoryController.getCategories
 // );

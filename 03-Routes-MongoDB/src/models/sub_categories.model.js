@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const subcategoriesSchema = new mongoose.Schema(
+const sub_categoriesSchema = new mongoose.Schema(
     {
         category_id: {
             type: mongoose.Types.ObjectId,
@@ -32,6 +32,6 @@ const subcategoriesSchema = new mongoose.Schema(
     }
 )
 
-const Subcategories = mongoose.model("Subcategories", subcategoriesSchema);
+const Sub_categories = mongoose.model("Sub_categories", sub_categoriesSchema);
 
-module.exports = Subcategories;
+module.exports = Sub_categories;

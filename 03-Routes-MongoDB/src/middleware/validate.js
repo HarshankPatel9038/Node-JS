@@ -1,4 +1,3 @@
-const { compile } = require("joi");
 const pick = require("../util/pick");
 const Joi = require("joi");
 
