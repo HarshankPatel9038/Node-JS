@@ -165,10 +165,207 @@
 
 
 6. Find the users who have not made any orders.
+
+
+
 7. Identify the most popular product (highest number of reviews).
+[
+  {
+    $group: {
+      _id: "$product_id",
+      "total_review": {
+        $sum: 1
+      }
+    }
+  },
+  {
+    $sort: {
+      total_review: -1
+    }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $lookup: {
+      from: "products",
+      localField: "_id",
+      foreignField: "_id",
+      as: "products"
+    }
+  },
+  {
+    $unwind: {
+      path: "$products"
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      name: "$products.name",
+     total_review: 1
+    }
+  }
+]
+
+
+
 8. Calculate the total revenue and average order value for each seller.
+[
+  {
+    $group: {
+      _id: "$seller_id",
+      total_revenue: {
+        $sum: "$total_amount"
+      },
+      total_orders: {
+        $sum: 1
+      },
+      total_order_amount: {
+        $sum: "$total_amount"
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: "users",
+      localField: "_id",
+      foreignField: "_id",
+      as: "users"
+    }
+  },
+  {
+    $unwind: {
+      path: "$users"
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      name: "$users.name",
+      total_revenue: 1,
+      average_order_value: {
+        $divide: ["$total_order_amount", "$total_orders"]
+      }
+    }
+  }
+]
+
+
+
 9. Find the products with a quantity less than 20 in the Variant collection.
+[
+  {
+    $match: {
+      "attributes.Quantity": {
+        $lt: 20
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: "products",
+      localField: "product_id",
+      foreignField: "_id",
+      as: "products"
+    }
+  },
+  {
+    $unwind: {
+      path: "$products",
+    }
+  },
+  {
+    $project: {
+      name: "$products.name"
+    }
+  }
+]
+
+
+
+
 10. Retrieve the top 5 customers with the highest total order value.
+[
+  {
+    $group: {
+      _id: "$user_id",
+      "count_order": {
+        $sum: 1
+      }
+    }
+  },
+  {
+    $sort: {
+      count_order: -1
+    }
+  },
+  {
+    $limit: 5
+  },
+  {
+    $lookup: {
+      from: "users",
+      localField: "_id",
+      foreignField: "_id",
+      as: "users"
+    }
+  },
+  {
+    $unwind: {
+      path: "$users",
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      count_order: 1,
+      name: "$users.name"
+    }
+  }
+]
+or
+[
+  {
+    $group: {
+      _id: "$user_id",
+      "total_amount": {
+        $sum: "$total_amount"
+      }
+    }
+  },
+  {
+    $sort: {
+      total_amount: -1
+    }
+  },
+  {
+    $limit: 5
+  },
+  {
+    $lookup: {
+      from: "users",
+      localField: "_id",
+      foreignField: "_id",
+      as: "users"
+    }
+  },
+  {
+    $unwind: {
+      path: "$users",
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      total_amount: 1,
+      name: "$users.name"
+    }
+  }
+]
+
+
+
 11. Find the average rating for each product.
 12. Retrieve the latest 5 reviews with user details.
 13. Identify the users who have items in their cart with a quantity greater than 5.
