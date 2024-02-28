@@ -600,10 +600,194 @@
 
 
 19. Find the top 3 subcategories with the highest average product price.
+[
+  {
+    $unwind: {
+      path: '$attributes',
+    }
+  },
+  {
+    $lookup: {
+      from: 'products',
+      localField: '_id',
+      foreignField: '_id',
+      as: 'products_result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$products_result',
+    }
+  },
+  {
+    $lookup: {
+      from: 'subcategories',
+      localField: 'products_result._id',
+      foreignField: '_id',
+      as: 'subcategory_result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$subcategory_result',
+    }
+  },
+  {
+    $group: {
+      _id: '$subcategory_result._id',
+      subcategory_name: {
+        $first: "$subcategory_result.subcategory_name"
+      },
+      avg_price: {
+        $avg: '$attributes.Price'
+      },
+      products: {
+        "$push": "$products_result.name"
+      }
+    }
+  },
+  {
+    $sort: {
+      avg_price: -1
+    }
+  },
+  {
+    $limit: 3
+  },
+]
 
 
 
 20. Retrieve the products that have received reviews with ratings greater than 4.
+[
+  {
+    $match: {
+      rating: {$gt: 4}
+    }
+  },
+  {
+    $lookup: {
+      from: 'products',
+      localField: 'product_id',
+      foreignField: '_id',
+      as: 'result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$result'
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      product_name: '$result.name',
+      rating: 1
+    }
+  }
+]
+
+
+
 21. Retrieve product data with their variant details from category.
+from categories
+[
+  {
+    $lookup: {
+      from: 'subcategories',
+      localField: '_id',
+      foreignField: 'category_id',
+      as: 'subcategories_result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$subcategories_result',
+    }
+  },
+  {
+    $lookup: {
+      from: 'products',
+      localField: 'subcategories_result._id',
+      foreignField: '_id',
+      as: 'products_result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$products_result',
+    }
+  },
+  {
+    "$lookup": {
+      from: "variants",
+      localField: "_id",
+      foreignField: "product_id",
+      as: "variants_result"
+    }
+  },
+  {
+    $unwind: {
+      path: '$variants_result',
+    }
+  },
+  {
+    $group: {
+      _id: '$category_name',
+      product_name: {
+        $first: "$products_result.name",
+      },
+      varients: {
+        "$push": "$variants_result"
+      }
+    }
+  }
+]
+or
+form products
+[
+  {
+    "$lookup": {
+      from: "subcategories",
+      localField: "subcategory_id",
+      foreignField: "_id",
+      as: "subcategory"
+    }
+  },
+  {
+    $unwind: "$subcategory"
+  },
+  {
+    "$lookup": {
+      from: "categories",
+      localField: "subcategory.category_id",
+      foreignField: "_id",
+      as: "category"
+    }
+  },
+  {
+    "$unwind": "$category"
+  },
+  {
+    "$lookup": {
+      from: "variants",
+      localField: "_id",
+      foreignField: "product_id",
+      as: "variants"
+    }
+  },
+  {
+    "$project": {
+      _id: 1,
+      category_name: "$category.category_name",
+      subcategory_name: "$subcategory.name",
+      product_name: "$name",
+      variants: 1
+    }
+  }
+]
+
+
+
 22. Retrieve Categories with Subcategory, Products with product count.
 23. Retrieve Payments with Order and Product Details.
