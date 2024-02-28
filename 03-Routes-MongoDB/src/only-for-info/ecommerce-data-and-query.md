@@ -165,6 +165,26 @@
 
 
 6. Find the users who have not made any orders.
+[
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "user_id",
+      as: "result"
+    }
+  },
+  {
+    $match: {
+     result: {$eq: []}
+    }
+  },
+  {
+    $project: {
+      name: 1
+    }
+  }
+]
 
 
 
@@ -324,19 +344,52 @@
     }
   }
 ]
-or
+
+
+
+11. Find the average rating for each product.
 [
   {
     $group: {
-      _id: "$user_id",
-      "total_amount": {
-        $sum: "$total_amount"
+      _id: "$product_id",
+      "avg_rating": {
+        $avg: "$rating"
       }
     }
   },
   {
+    $lookup: {
+      from: "products",
+      localField: "_id",
+      foreignField: "_id",
+      as: "result"
+    }
+  },
+  {
+    $unwind: {
+      path: "$result",
+    }
+  },
+  {
+    $project: {
+      avg_rating: 1,
+      name: "$result.name"
+    }
+  }
+]
+
+
+
+12. Retrieve the latest 5 reviews with user details.
+[
+  {
+    $group: {
+      _id: "$user_id",
+    }
+  },
+  {
     $sort: {
-      total_amount: -1
+      _id: -1
     }
   },
   {
@@ -347,34 +400,209 @@ or
       from: "users",
       localField: "_id",
       foreignField: "_id",
-      as: "users"
+      as: "result"
     }
   },
   {
     $unwind: {
-      path: "$users",
+      path: "$result",
     }
   },
   {
     $project: {
-      _id: 1,
-      total_amount: 1,
-      name: "$users.name"
+      name: "$result.name",
+      address: "$result.address",
+      mobile_no: "$result.mobile_no",
+      email: "$result.email",
     }
   }
 ]
 
 
 
-11. Find the average rating for each product.
-12. Retrieve the latest 5 reviews with user details.
 13. Identify the users who have items in their cart with a quantity greater than 5.
+[
+  {
+    $unwind: {
+      path: "$items"
+    }
+  },
+  {
+    $group: {
+      _id: "$user_id",
+      "quantity": {
+        $sum: "$items.quantity"
+      }
+    }
+  },
+  {
+    $match: {
+      quantity: {
+        $gt: 5
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'users',
+      localField: '_id',
+      foreignField: '_id',
+      as: 'result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$result',
+    }
+  },
+  {
+    $project: {
+      name: '$result.name',
+      quantity: 1
+    }
+  }
+]
+
+
+
 14. Calculate the total number of orders placed using each payment gateway.
+[
+  {
+    $group: {
+        _id: "$gateway",
+       'total_gateway': {
+         $sum: 1
+       },
+      order_id: {
+        $push: "$order_id"
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'orders',
+      localField: 'order_id',
+      foreignField: '_id',
+      as: 'result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$result'
+    }
+  }
+]
+
+
+
 15. Find the subcategories with no active products.
-16. Retrieve the orders with a total amount greater than 2000 and status as "Completed."
+[
+  {
+    $match: {
+      isActive: false
+    }
+  },
+  {
+    $lookup: {
+      from: 'subcategories',
+      localField: 'subcategory_id',
+      foreignField: '_id',
+      as: 'result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$result'
+    }
+  },
+  {
+    $project: {
+      subcategory_name: '$result.subcategory_name',
+      produt_name: '$name',
+      isActive: 1
+    }
+  }
+]
+
+
+
+16. Retrieve the orders with a total amount greater than 400 and status as "Completed."
+[
+  {
+    $match: {
+      status: 'Completed',
+      total_amount: {$gt: 400}
+    }
+  }
+]
+
+
+
 17. Identify the products that have not been reviewed.
+[
+  {
+    $lookup: {
+      from: "reviews",
+      localField: "_id",
+      foreignField: "product_id",
+      as: "result"
+    }
+  },
+  {
+    $match: {
+      result: []
+    }
+  }
+]
+
+
+
 18. Calculate the total revenue and total quantity sold for each product.
+[
+  {
+    $unwind: {
+      path: '$products'
+    }
+  },
+  {
+    $group: {
+      _id: '$products.product_id',
+      'total_qty': {
+        $sum: '$products.quantity'
+      },
+      'total_amount': {
+        $sum: '$total_amount'
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'products',
+      localField: '_id',
+      foreignField: '_id',
+      as: 'result'
+    }
+  },
+  {
+    $unwind: {
+      path: '$result'
+    }
+  },
+  {
+    $project: {
+      total_qty: 1,
+      total_amount: 1,
+      product_name: '$result.name'
+    }
+  }
+]
+
+
+
 19. Find the top 3 subcategories with the highest average product price.
+
+
+
 20. Retrieve the products that have received reviews with ratings greater than 4.
 21. Retrieve product data with their variant details from category.
 22. Retrieve Categories with Subcategory, Products with product count.
