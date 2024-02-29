@@ -2,17 +2,19 @@ const Joi = require("joi");
 
 const createCategory = {
     body: {
-        name: Joi.string().required().trim(),
-        description: Joi.string().required().trim(),
-        image: Joi.string().required().trim()
+        _id: Joi.number().required(),
+        category_image: Joi.string().required().trim(),
+        category_name: Joi.string().required().trim(),
+        category_desc: Joi.string().required().trim(),
+        isActive: Joi.boolean()
     }
 }
 
 const updateCategory = {
     body: {
-        name: Joi.string().trim(),
-        description: Joi.string().trim(),
-        image: Joi.string().trim(),
+        category_image: Joi.string().trim(),
+        category_name: Joi.string().trim(),
+        category_desc: Joi.string().trim(),
         isActive: Joi.boolean()
     },
     params: {

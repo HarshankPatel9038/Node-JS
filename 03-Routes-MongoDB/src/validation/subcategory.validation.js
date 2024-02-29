@@ -2,20 +2,21 @@ const Joi = require("joi");
 
 const createSubcategory = {
   body: {
-    category_id: Joi.string().required(),
-    name: Joi.string().required().trim(),
-    description: Joi.string().required().trim(),
-    image: Joi.string().required().trim(),
+    _id: Joi.number().required(),
+    category_id: Joi.number().required(),
+    subcategory_image: Joi.string().required().trim(),
+    subcategory_name: Joi.string().required().trim(),
+    subcategory_desc: Joi.string().required().trim(),
     isActive: Joi.boolean().required()
   }
 }
 
 const updateSubcategory = {
   body: {
-    category_id: Joi.string(),
-    name: Joi.string().trim(),
-    description: Joi.string().trim(),
-    image: Joi.string().trim(),
+    category_id: Joi.number(),
+    subcategory_image: Joi.string().trim(),
+    subcategory_name: Joi.string().trim(),
+    subcategory_desc: Joi.string().trim(),
     isActive: Joi.boolean()
   },
   params: {

@@ -5,30 +5,46 @@ const { subcategoryController } = require('../../controller');
 
 const route = express.Router();
 
-// ========= 01 list-subcategory =========
-// route.get('/list-subcategory',
-//     subcategoryController.getSubcategories
-// );
+route.get('/list-subcategory',
+    subcategoryController.listSubcategories
+);
 
-// ========= 02 get-subcategory By Id =========
-// route.get('/get-subcategory/:subcategoryId',
-//     subcategoryController.getSubcategories
-// );
-
-// ========= 03 parent-of-subcategory =========
-
-// ========= 04 list-by-category =========
-
-// ========= 05 count-active =========
-// route.get('/count-active',
-//     subcategoryController.getSubcategories
-// )
-
-// ========= 09 inactive =========
-route.get('/inactive',
+route.get('/get-subcategory/:subcategoryId',
     subcategoryController.getSubcategories
+);
+
+route.get('/parent-of-subcategory/:subcategoryId',
+    subcategoryController.parentOfSubcategory
+);
+
+route.get('/list-by-category/:subcategoryId',
+    subcategoryController.listByCategory
+);
+
+route.get('/most-products',
+    subcategoryController.mostProducts
+);
+
+route.get('/count-active',
+    subcategoryController.countActiveSubcategory
 )
 
+route.get('/inactive',
+    subcategoryController.inActiveSubcategory
+)
+
+route.get('/count-products',
+    subcategoryController.countProducts
+)
+
+// {
+//     "_id": 50,
+//     "category_id": 1,
+//     "subcategory_image": "www.google.com",
+//     "subcategory_name": "ABCDEFGHI",
+//     "subcategory_desc": "gdvhvxv svx vgvds vjhdsgvjhcx gvjhxgv xcjvhgx vjhxcgvjhxg vjhxcg vjx gvgvjvgxcv",
+//     "isActive": false
+// }
 route.post('/create-subcategory',
     validate(subcategoryValidation.createSubcategory),
     subcategoryController.createSubcategories
