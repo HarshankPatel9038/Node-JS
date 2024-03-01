@@ -1,3 +1,3 @@
 module.exports.categoryController = require('./categories.controller');
 module.exports.subcategoryController = require('./subcategories.controller');
-// module.exports.variantController = require('./variant.controller');
+module.exports.variantController = require('./variants.controller');

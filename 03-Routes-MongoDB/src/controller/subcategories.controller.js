@@ -32,7 +32,7 @@ const getSubcategories = async (req, res) => {
     if (!categoryId) {
       return res.status(400).json({
         success: false,
-        message: 'subcategory ID is required'
+        message: 'Category ID is required'
       });
     }
     const subcategory = await SubCategories.aggregate([

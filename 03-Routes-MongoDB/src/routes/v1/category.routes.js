@@ -32,6 +32,14 @@ route.get('/count-subcategories',
     categoryController.countSubcategories
 );
 
+
+// {
+//     "_id": 50,
+//     "category_image": "www.google.com",
+//     "category_name": "ABCD",
+//     "category_desc": "Lorem Ipsum",
+//     "isActive": true
+// }
 route.post('/create-category',
     validate(categoryValidation.createCategory),
     categoryController.createCategories

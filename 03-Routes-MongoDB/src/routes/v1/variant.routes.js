@@ -1,34 +1,53 @@
-// const express = require('express');
-// const router = express.Router();
-// const validate = require('../../middleware/validate');
-// const { variantController } = require('../../controller');
+const express = require('express');
+const { variantController } = require('../../controller');
+const validate = require('../../middleware/validate');
+const { variantValidation } = require('../../validation');
+const route = express.Router();
 
-// router.get('/list-variant',
-//   variantController.listVariant
+route.get('/list-variant',
+  variantController.listVariants
+);
+
+route.get('/get-variant/:variantId',
+  variantController.getVariants
+);
+
+// route.get('/product/:productId',
+//   variantController.product
 // );
 
-// router.get('/get-variant/:variantId',
-//   variantController.getVariant
-// );
+route.get('/active',
+  variantController.activeVariant
+);
 
-// router.get('/count-active',
-//   variantController.countActiveVariant
-// )
+route.get('/count-products',
+  variantController.countProducts
+);
 
-// router.get('/inactive',
-//   variantController.inActiveVariant
-// )
+// {
+//   "_id": 50,
+//   "product_id": 1,
+//   "attributes": {
+//     "Color": "Red",
+//     "Size": "5GB",
+//     "Price": 999.99,
+//     "Quantity": 50
+//   },
+//   "isActive": false
+// }
+route.post('/create-variant',
+  validate(variantValidation.createVariant),
+  variantController.createVariants
+);
 
-// // {
-// //   "_id": 50,
-// //   "product_id": 4,
-// //   "attributes": {
-// //     "Color": "Black",
-// //     "Size": "M",
-// //     "Price": 19.99,
-// //     "Quantity": 50
-// //   },
-// //   "isActive": false
-// // }
+route.put('/update-variant/:variantId',
+  validate(variantValidation.updateVariant),
+  variantController.updateVariants
+);
 
-// module.exports = router;
+route.delete('/delete-variant/:variantId',
+  validate(variantValidation.deleteVariant),
+  variantController.deleteVariant
+);
+
+module.exports = route;
