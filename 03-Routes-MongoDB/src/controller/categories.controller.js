@@ -51,7 +51,6 @@ const getCategories = async (req, res) => {
             message: 'Category Get Successfully'
         });
     } catch (error) {
-        console.log(error.message)
         return res.status(500).json({
             success: false,
             message: 'Internal Server Error'

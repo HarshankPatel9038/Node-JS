@@ -9,7 +9,7 @@ route.get('/list-subcategory',
     subcategoryController.listSubcategories
 );
 
-route.get('/get-subcategory/:subcategoryId',
+route.get('/get-subcategory/:categoryId',
     subcategoryController.getSubcategories
 );
 
@@ -17,9 +17,9 @@ route.get('/parent-of-subcategory/:subcategoryId',
     subcategoryController.parentOfSubcategory
 );
 
-route.get('/list-by-category/:subcategoryId',
-    subcategoryController.listByCategory
-);
+// route.get('/list-by-category/:subcategoryId',
+//     subcategoryController.listByCategory
+// );
 
 route.get('/most-products',
     subcategoryController.mostProducts

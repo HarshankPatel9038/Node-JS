@@ -26,14 +26,46 @@ const listSubcategories = async (req, res) => {
 
 const getSubcategories = async (req, res) => {
   try {
-    const subCategoryId = req.params.subcategoryId;
-    if (!subCategoryId) {
+    const categoryId = req.params.categoryId;
+    const convertIdInNumber = +categoryId;
+    console.log(convertIdInNumber)
+    if (!categoryId) {
       return res.status(400).json({
         success: false,
         message: 'subcategory ID is required'
       });
     }
-    const subcategory = await SubCategories.findById(subCategoryId);
+    const subcategory = await SubCategories.aggregate([
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category_id",
+          foreignField: "_id",
+          as: "result"
+        }
+      },
+      {
+        $unwind: {
+          path: "$result",
+        }
+      },
+      {
+        $match: {
+          "result._id": { $eq: convertIdInNumber }
+        }
+      },
+      {
+        $group: {
+          _id: "$result._id",
+          category_name: {
+            $first: "$result.category_name"
+          },
+          subcategory: {
+            $push: "$subcategory_name"
+          }
+        }
+      },
+    ]);
 
     if (!subcategory || subcategory.length === 0) {
       return res.status(404).json({
@@ -58,7 +90,7 @@ const getSubcategories = async (req, res) => {
 const parentOfSubcategory = async (req, res) => {
   try {
     const subCategoryId = req.params.subcategoryId;
-    const counvertIdInNumber = +subCategoryId;
+    const convertIdInNumber = +subCategoryId;
     if (!subCategoryId) {
       return res.status(400).json({
         success: false,
@@ -81,7 +113,7 @@ const parentOfSubcategory = async (req, res) => {
       },
       {
         $match: {
-          _id: { $eq: counvertIdInNumber }
+          _id: { $eq: convertIdInNumber }
         }
       },
       {
@@ -113,67 +145,67 @@ const parentOfSubcategory = async (req, res) => {
   }
 };
 
-const listByCategory = async (req, res) => {
-  try {
-    const subCategoryId = req.params.subcategoryId;
-    const counvertIdInNumber = +subCategoryId;
-    if (!subCategoryId) {
-      return res.status(400).json({
-        success: false,
-        message: 'subcategory ID is required'
-      });
-    }
-    const subcategory = await SubCategories.aggregate([
-      {
-        $lookup: {
-          from: "categories",
-          localField: "category_id",
-          foreignField: "_id",
-          as: "result"
-        }
-      },
-      {
-        $unwind: {
-          path: "$result",
-        }
-      },
-      {
-        $match: {
-          _id: { $eq: counvertIdInNumber }
-        }
-      },
-      {
-        $group: {
-          _id: "$result._id",
-          category_name: {
-            $first: "$result.category_name"
-          },
-          subcategory: {
-            $push: "$subcategory_name"
-          }
-        }
-      },
-    ])
+// const listByCategory = async (req, res) => {
+//   try {
+//     const subCategoryId = req.params.subcategoryId;
+//     const convertIdInNumber = +subCategoryId;
+//     if (!subCategoryId) {
+//       return res.status(400).json({
+//         success: false,
+//         message: 'subcategory ID is required'
+//       });
+//     }
+//     const subcategory = await SubCategories.aggregate([
+//       {
+//         $lookup: {
+//           from: "categories",
+//           localField: "category_id",
+//           foreignField: "_id",
+//           as: "result"
+//         }
+//       },
+//       {
+//         $unwind: {
+//           path: "$result",
+//         }
+//       },
+//       {
+//         $match: {
+//           _id: { $eq: convertIdInNumber }
+//         }
+//       },
+//       {
+//         $group: {
+//           _id: "$result._id",
+//           category_name: {
+//             $first: "$result.category_name"
+//           },
+//           subcategory: {
+//             $push: "$subcategory_name"
+//           }
+//         }
+//       },
+//     ])
 
-    if (!subcategory || subcategory.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: 'No Subcategories found'
-      });
-    }
+//     if (!subcategory || subcategory.length === 0) {
+//       return res.status(404).json({
+//         success: false,
+//         message: 'No Subcategories found'
+//       });
+//     }
 
-    return res.status(200).json({
-      success: true,
-      data: subcategory,
-      message: 'Get Subcategory By List Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Internal Server Error'
-    });
-  }
-};
+//     return res.status(200).json({
+//       success: true,
+//       data: subcategory,
+//       message: 'Get Subcategory By List Successfully'
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: 'Internal Server Error'
+//     });
+//   }
+// };
 
 const mostProducts = async (req, res) => {
   try {
@@ -376,8 +408,7 @@ const createSubcategories = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      // message: 'Internal Server Error'
-      message: error.message
+      message: 'Internal Server Error'
     });
   }
 };
@@ -452,7 +483,7 @@ module.exports = {
   listSubcategories,
   getSubcategories,
   parentOfSubcategory,
-  listByCategory,
+  // listByCategory,
   mostProducts,
   countProducts,
   countActiveSubcategory,

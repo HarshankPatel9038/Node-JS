@@ -6,7 +6,8 @@ const subcategoriesSchema = new mongoose.Schema(
             type: Number
         },
         category_id: {
-            type: mongoose.Types.ObjectId,
+            // type: mongoose.Types.ObjectId,
+            type: Number,
             ref: 'Categories',
             required: true
         },
