@@ -12,9 +12,29 @@ route.get('/get-variant/:variantId',
   variantController.getVariants
 );
 
-// route.get('/product/:productId',
-//   variantController.product
-// );
+route.get('/product/:productId',
+  variantController.product
+);
+
+route.get('/list-variant/:productId',
+  variantController.listVariantByProductId
+);
+
+route.get('/count-stock/:productId',
+  variantController.countStock
+);
+
+route.get('/low-quantity',
+  variantController.lowQuantity
+);
+
+route.get('/high-price',
+  variantController.highPrice
+);
+
+route.get('/multiple-variants',
+  variantController.multipleVariants
+);
 
 route.get('/active',
   variantController.activeVariant
