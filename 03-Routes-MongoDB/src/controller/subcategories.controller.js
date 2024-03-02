@@ -477,7 +477,7 @@ const deleteSubcategory = async (req, res) => {
       message: 'Internal Server Error'
     })
   }
-}
+};
 
 module.exports = {
   listSubcategories,

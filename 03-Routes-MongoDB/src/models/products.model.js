@@ -2,9 +2,25 @@ const mongoose = require('mongoose');
 
 const productsSchema = new mongoose.Schema(
     {
+        _id: {
+            type: Number
+        },
+        category_id: {
+            // type: mongoose.Types.ObjectId,
+            type: Number,
+            ref: 'categories',
+            required: true
+        },
         subcategory_id: {
-            type: mongoose.Types.ObjectId,
+            // type: mongoose.Types.ObjectId,
+            type: Number,
             ref: 'Subcategories',
+            required: true
+        },
+        variant_id: {
+            // type: mongoose.Types.ObjectId,
+            type: Number,
+            ref: 'variants',
             required: true
         },
         image: {
@@ -19,9 +35,6 @@ const productsSchema = new mongoose.Schema(
         description: {
             type: String,
             trim: true,
-        },
-        discount: {
-            type: Number,
         },
         isActive: {
             type: Boolean,

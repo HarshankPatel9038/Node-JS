@@ -1,16 +1,41 @@
 const Joi = require("joi");
 
-const createProducts = {
+const createProduct = {
   body: {
-    category_id: Joi.string().required(),
-    subcategory_id: Joi.string().required(),
+    _id: Joi.number().required(),
+    category_id: Joi.number().required(),
+    subcategory_id: Joi.number().required(),
+    variant_id: Joi.number().required(),
+    image: Joi.string().required().trim(),
     name: Joi.string().required().trim(),
     description: Joi.string().required().trim(),
-    image: Joi.string().required().trim(),
     isActive: Joi.boolean().required()
   }
-}
+};
+
+const updateProduct = {
+  body: {
+    category_id: Joi.number(),
+    subcategory_id: Joi.number(),
+    variant_id: Joi.number(),
+    image: Joi.string().trim(),
+    name: Joi.string().trim(),
+    description: Joi.string().trim(),
+    isActive: Joi.boolean()
+  },
+  params: {
+    productId: Joi.string().required().trim()
+  }
+};
+
+const deleteProduct = {
+  params: {
+    productId: Joi.string().required().trim()
+  }
+};
 
 module.exports = {
-  createProducts
+  createProduct,
+  updateProduct,
+  deleteProduct
 }

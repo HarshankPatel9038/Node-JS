@@ -16,7 +16,7 @@ const updateVariant = {
     isActive: Joi.boolean()
   },
   params: {
-    variantId: Joi.string().required()
+    variantId: Joi.string().required().trim()
   }
 };
 

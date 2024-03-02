@@ -20,7 +20,7 @@ const updateSubcategory = {
     isActive: Joi.boolean()
   },
   params: {
-    subcategoryId: Joi.string().required()
+    subcategoryId: Joi.string().required().trim()
   }
 };
 

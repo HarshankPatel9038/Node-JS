@@ -18,7 +18,7 @@ const updateCategory = {
         isActive: Joi.boolean()
     },
     params: {
-        categoryId: Joi.string().required()
+        categoryId: Joi.string().required().trim()
     }
 };
 

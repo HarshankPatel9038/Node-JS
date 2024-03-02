@@ -3,9 +3,9 @@ const Variants = require("../models/variants.model");
 const listVariants = async (req, res) => {
 
   try {
-    const category = await Variants.find();
+    const variant = await Variants.find();
 
-    if (!category || category.length === 0) {
+    if (!variant || variant.length === 0) {
       return res.status(404).json({
         success: false,
         message: 'No Variants found'
@@ -14,8 +14,8 @@ const listVariants = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      data: category,
-      message: 'Category List Successfully'
+      data: variant,
+      message: 'Variant List Successfully'
     });
   } catch (error) {
     return res.status(500).json({
