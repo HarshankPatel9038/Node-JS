@@ -4,10 +4,6 @@ const validate = require('../../middleware/validate');
 const { productValidation } = require('../../validation');
 const route = express.Router();
 
-route.get('/list-products',
-  productController.listProducts
-);
-
 
 // {
 //   "_id": 50,
@@ -24,6 +20,14 @@ route.post('/create-products',
   productController.createProducts
 );
 
+route.get('/list-products',
+  productController.listProducts
+);
+
+route.get('/get-products/:productId',
+  productController.getProducts
+);
+
 route.put('/update-products/:productId',
   validate(productValidation.updateProduct),
   productController.updateProduct
@@ -32,6 +36,34 @@ route.put('/update-products/:productId',
 route.delete('/delete-products/:productId',
   validate(productValidation.deleteProduct),
   productController.deleteProduct
+);
+
+route.get('/search/:productName',
+  productController.searchByName
+);
+
+route.get('/list/category/:categoryId',
+  productController.listProductByCategory
+);
+
+route.get('/list/subcategory/:subcategoryId',
+  productController.listProductBySubcategory
+);
+
+route.get('/top-rated',
+  productController.topRated
+);
+
+route.get('/new-arrivals',
+  productController.newArrivals
+);
+
+route.get('/out-of-stock',
+  productController.outOfStock
+);
+
+route.get('/count-categories',
+  productController.countProductByCategory
 );
 
 module.exports = route;

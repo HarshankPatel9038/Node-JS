@@ -2,40 +2,8 @@ const express = require('express');
 const validate = require('../../middleware/validate');
 const { subcategoryValidation } = require('../../validation');
 const { subcategoryController } = require('../../controller');
-
 const route = express.Router();
 
-route.get('/list-subcategory',
-    subcategoryController.listSubcategories
-);
-
-route.get('/get-subcategory/:categoryId',
-    subcategoryController.getSubcategories
-);
-
-route.get('/parent-of-subcategory/:subcategoryId',
-    subcategoryController.parentOfSubcategory
-);
-
-// route.get('/list-by-category/:subcategoryId',
-//     subcategoryController.listByCategory
-// );
-
-route.get('/most-products',
-    subcategoryController.mostProducts
-);
-
-route.get('/count-active',
-    subcategoryController.countActiveSubcategory
-)
-
-route.get('/inactive',
-    subcategoryController.inActiveSubcategory
-)
-
-route.get('/count-products',
-    subcategoryController.countProducts
-)
 
 // {
 //     "_id": 50,
@@ -50,6 +18,14 @@ route.post('/create-subcategory',
     subcategoryController.createSubcategories
 );
 
+route.get('/list-subcategory',
+    subcategoryController.listSubcategories
+);
+
+route.get('/get-subcategory/:categoryId',
+    subcategoryController.getSubcategories
+);
+
 route.put('/update-subcategory/:subcategoryId',
     validate(subcategoryValidation.updateSubcategory),
     subcategoryController.updateSubcategories
@@ -58,6 +34,30 @@ route.put('/update-subcategory/:subcategoryId',
 route.delete('/delete-subcategory/:subcategoryId',
     validate(subcategoryValidation.deleteSubcategory),
     subcategoryController.deleteSubcategory
+);
+
+route.get('/parent-of-subcategory/:subcategoryId',
+    subcategoryController.parentOfSubcategory
+);
+
+// route.get('/list-by-category/:subcategoryId',
+//     subcategoryController.listByCategory
+// );
+
+route.get('/count-active',
+    subcategoryController.countActiveSubcategory
+);
+
+route.get('/most-products',
+    subcategoryController.mostProducts
+);
+
+route.get('/inactive',
+    subcategoryController.inActiveSubcategory
+);
+
+route.get('/count-products',
+    subcategoryController.countProducts
 );
 
 module.exports = route;

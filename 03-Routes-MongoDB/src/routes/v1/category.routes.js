@@ -4,34 +4,6 @@ const validate = require('../../middleware/validate');
 const { categoryValidation } = require('../../validation');
 const { categoryController } = require('../../controller');
 
-route.get('/list-category',
-    categoryController.listCategories
-);
-
-route.get('/get-category/:categoryId',
-    categoryController.getCategories
-);
-
-route.get('/count-active',
-    categoryController.countActive
-);
-
-route.get('/inactive',
-    categoryController.inActive
-);
-
-route.get('/most-products',
-    categoryController.mostProducts
-);
-
-route.get('/average-products',
-    categoryController.averageProducts
-);
-
-route.get('/count-subcategories',
-    categoryController.countSubcategories
-);
-
 
 // {
 //     "_id": 50,
@@ -45,6 +17,14 @@ route.post('/create-category',
     categoryController.createCategories
 );
 
+route.get('/list-category',
+    categoryController.listCategories
+);
+
+route.get('/get-category/:categoryId',
+    categoryController.getCategories
+);
+
 route.put('/update-category/:categoryId',
     validate(categoryValidation.updateCategory),
     categoryController.updateCategories
@@ -53,6 +33,26 @@ route.put('/update-category/:categoryId',
 route.delete('/delete-category/:categoryId',
     validate(categoryValidation.deleteCategory),
     categoryController.deleteCategories
+);
+
+route.get('/count-active',
+    categoryController.countActive
+);
+
+route.get('/most-products',
+    categoryController.mostProducts
+);
+
+route.get('/average-products',
+    categoryController.averageProducts
+);
+
+route.get('/inactive',
+    categoryController.inActive
+);
+
+route.get('/count-subcategories',
+    categoryController.countSubcategories
 );
 
 module.exports = route;

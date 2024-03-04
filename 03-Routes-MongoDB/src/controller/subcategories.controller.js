@@ -1,5 +1,29 @@
 const SubCategories = require("../models/subCategories.model");
 
+const createSubcategories = async (req, res) => {
+  try {
+    const subcategory = await SubCategories.create(req.body);
+
+    if (!subcategory) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: subcategory,
+      message: 'Create Subcategory Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 const listSubcategories = async (req, res) => {
   try {
     const subcategory = await SubCategories.find();
@@ -28,7 +52,6 @@ const getSubcategories = async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
     const convertIdInNumber = +categoryId;
-    console.log(convertIdInNumber)
     if (!categoryId) {
       return res.status(400).json({
         success: false,
@@ -84,6 +107,72 @@ const getSubcategories = async (req, res) => {
       success: false,
       message: 'Internal Server Error'
     });
+  }
+};
+
+const updateSubcategories = async (req, res) => {
+  try {
+    const subCategoryId = req.params.subcategoryId;
+    const bodyData = req.body;
+
+
+    if (!subCategoryId) {
+      return res.status(400).json({
+        success: false,
+        message: 'subcategory ID is required'
+      });
+    }
+    const subcategory = await SubCategories.findByIdAndUpdate(subCategoryId, bodyData, { new: true });
+
+    if (!subcategory) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: subcategory,
+      message: 'Update Subcategory Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const deleteSubcategory = async (req, res) => {
+  try {
+    const subCategoryId = req.params.subcategoryId;
+
+    if (!subCategoryId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Subcategory ID Is Not required'
+      })
+    }
+
+    const subCategory = await SubCategories.findByIdAndDelete(subCategoryId);
+
+    if (!subCategory) {
+      return res.status(404).json({
+        success: false,
+        message: 'Subcategory Not Found'
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: subCategory,
+      message: 'Delete Subcategory Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Internal Server Error'
+    })
   }
 };
 
@@ -207,6 +296,39 @@ const parentOfSubcategory = async (req, res) => {
 //   }
 // };
 
+const countActiveSubcategory = async (req, res) => {
+  try {
+    const subcategory = await SubCategories.aggregate([
+      {
+        $match: {
+          isActive: true
+        }
+      },
+      {
+        $count: 'Total Active SubCategory'
+      }
+    ]);
+
+    if (!subcategory || subcategory.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Subcategories found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: subcategory,
+      message: 'Count Active Subcategory Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 const mostProducts = async (req, res) => {
   try {
     const subcategory = await SubCategories.aggregate([
@@ -274,6 +396,36 @@ const mostProducts = async (req, res) => {
   }
 };
 
+const inActiveSubcategory = async (req, res) => {
+  try {
+    const subcategory = await SubCategories.aggregate([
+      {
+        $match: {
+          isActive: false
+        }
+      }
+    ]);
+
+    if (!subcategory || subcategory.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Subcategories found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: subcategory,
+      message: 'Get InActive Subcategory Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 const countProducts = async (req, res) => {
   try {
     const subcategory = await SubCategories.aggregate([
@@ -326,169 +478,16 @@ const countProducts = async (req, res) => {
   }
 };
 
-const countActiveSubcategory = async (req, res) => {
-  try {
-    const subcategory = await SubCategories.aggregate([
-      {
-        $match: {
-          isActive: true
-        }
-      },
-      {
-        $count: 'Total Active SubCategory'
-      }
-    ]);
-
-    if (!subcategory || subcategory.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: 'No Subcategories found'
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: subcategory,
-      message: 'Count Active Subcategory Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Internal Server Error'
-    });
-  }
-};
-
-const inActiveSubcategory = async (req, res) => {
-  try {
-    const subcategory = await SubCategories.aggregate([
-      {
-        $match: {
-          isActive: false
-        }
-      }
-    ]);
-
-    if (!subcategory || subcategory.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: 'No Subcategories found'
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: subcategory,
-      message: 'Get InActive Subcategory Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Internal Server Error'
-    });
-  }
-};
-
-const createSubcategories = async (req, res) => {
-  try {
-    const subcategory = await SubCategories.create(req.body);
-
-    if (!subcategory) {
-      return res.status(500).json({
-        success: false,
-        message: 'Internal Server Error'
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: subcategory,
-      message: 'Create Subcategory Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Internal Server Error'
-    });
-  }
-};
-
-const updateSubcategories = async (req, res) => {
-  try {
-    const subCategoryId = req.params.subcategoryId;
-    const bodyData = req.body;
-
-
-    if (!subCategoryId) {
-      return res.status(400).json({
-        success: false,
-        message: 'subcategory ID is required'
-      });
-    }
-    const subcategory = await SubCategories.findByIdAndUpdate(subCategoryId, bodyData, { new: true });
-
-    if (!subcategory) {
-      return res.status(500).json({
-        success: false,
-        message: 'Internal Server Error'
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: subcategory,
-      message: 'Update Subcategory Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Internal Server Error'
-    });
-  }
-};
-
-const deleteSubcategory = async (req, res) => {
-  try {
-    const subCategoryId = req.params.subcategoryId;
-
-    if (!subCategoryId) {
-      return res.status(400).json({
-        success: false,
-        message: 'Subcategory ID Is Not required'
-      })
-    }
-
-    const subCategory = await SubCategories.findByIdAndDelete(subCategoryId);
-
-    if (!subCategory) {
-      return res.status(404).json({
-        success: false,
-        message: 'Subcategory Not Found'
-      })
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: subCategory,
-      message: 'Delete Subcategory Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Internal Server Error'
-    })
-  }
-};
-
 module.exports = {
+  createSubcategories,
   listSubcategories,
   getSubcategories,
+  updateSubcategories,
+  deleteSubcategory,
   parentOfSubcategory,
   // listByCategory,
-  mostProducts,
-  countProducts,
   countActiveSubcategory,
+  mostProducts,
   inActiveSubcategory,
-  createSubcategories,
-  updateSubcategories,
-  deleteSubcategory
+  countProducts
 }

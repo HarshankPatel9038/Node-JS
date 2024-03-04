@@ -1,5 +1,29 @@
 const Variants = require("../models/variants.model");
 
+const createVariants = async (req, res) => {
+  try {
+    const variant = await Variants.create(req.body);
+
+    if (!variant) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: variant,
+      message: 'Create Variant Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 const listVariants = async (req, res) => {
 
   try {
@@ -24,7 +48,6 @@ const listVariants = async (req, res) => {
     });
   }
 };
-
 
 const getVariants = async (req, res) => {
   try {
@@ -59,6 +82,71 @@ const getVariants = async (req, res) => {
   }
 };
 
+const updateVariants = async (req, res) => {
+  try {
+    const variantId = req.params.variantId;
+    const bodyData = req.body;
+
+
+    if (!variantId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Variant ID is required'
+      });
+    }
+    const variant = await Variants.findByIdAndUpdate(variantId, bodyData, { new: true });
+
+    if (!variant) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: variant,
+      message: 'Update Variant Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const deleteVariant = async (req, res) => {
+  try {
+    const variantId = req.params.variantId;
+
+    if (!variantId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Variant ID Is Not required'
+      })
+    }
+
+    const variant = await Variants.findByIdAndDelete(variantId);
+
+    if (!variant) {
+      return res.status(404).json({
+        success: false,
+        message: 'Variant Not Found'
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: variant,
+      message: 'Delete Variant Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Internal Server Error'
+    })
+  }
+};
 
 const product = async (req, res) => {
   try {
@@ -385,7 +473,7 @@ const multipleVariants = async (req, res) => {
       },
       {
         $match: {
-          total_attributes: {$gt: 1}
+          total_attributes: { $gt: 1 }
         }
       }
     ]);
@@ -490,100 +578,12 @@ const countProducts = async (req, res) => {
   }
 };
 
-const createVariants = async (req, res) => {
-  try {
-    const variant = await Variants.create(req.body);
-
-    if (!variant) {
-      return res.status(500).json({
-        success: false,
-        message: 'Internal Server Error'
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: variant,
-      message: 'Create Variant Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Internal Server Error'
-    });
-  }
-};
-
-
-const updateVariants = async (req, res) => {
-  try {
-    const variantId = req.params.variantId;
-    const bodyData = req.body;
-
-
-    if (!variantId) {
-      return res.status(400).json({
-        success: false,
-        message: 'Variant ID is required'
-      });
-    }
-    const variant = await Variants.findByIdAndUpdate(variantId, bodyData, { new: true });
-
-    if (!variant) {
-      return res.status(500).json({
-        success: false,
-        message: 'Internal Server Error'
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: variant,
-      message: 'Update Variant Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Internal Server Error'
-    });
-  }
-};
-
-const deleteVariant = async (req, res) => {
-  try {
-    const variantId = req.params.variantId;
-
-    if (!variantId) {
-      return res.status(400).json({
-        success: false,
-        message: 'Variant ID Is Not required'
-      })
-    }
-
-    const variant = await Variants.findByIdAndDelete(variantId);
-
-    if (!variant) {
-      return res.status(404).json({
-        success: false,
-        message: 'Variant Not Found'
-      })
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: variant,
-      message: 'Delete Variant Successfully'
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Internal Server Error'
-    })
-  }
-};
-
 module.exports = {
+  createVariants,
   listVariants,
   getVariants,
+  updateVariants,
+  deleteVariant,
   product,
   listVariantByProductId,
   countStock,
@@ -591,8 +591,5 @@ module.exports = {
   highPrice,
   multipleVariants,
   activeVariant,
-  countProducts,
-  createVariants,
-  updateVariants,
-  deleteVariant
+  countProducts
 }
