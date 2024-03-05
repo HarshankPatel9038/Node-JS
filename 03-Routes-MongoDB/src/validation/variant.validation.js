@@ -5,7 +5,7 @@ const createVariant = {
     _id: Joi.number().required(),
     product_id: Joi.number().required(),
     attributes: Joi.object().required(),
-    isActive: Joi.boolean().required()
+    isActive: Joi.boolean()
   }
 }
 

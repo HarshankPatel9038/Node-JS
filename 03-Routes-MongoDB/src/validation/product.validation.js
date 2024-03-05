@@ -9,7 +9,7 @@ const createProduct = {
     image: Joi.string().required().trim(),
     name: Joi.string().required().trim(),
     description: Joi.string().required().trim(),
-    isActive: Joi.boolean().required()
+    isActive: Joi.boolean()
   }
 };
 

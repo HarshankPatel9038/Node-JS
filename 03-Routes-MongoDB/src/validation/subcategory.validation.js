@@ -7,7 +7,7 @@ const createSubcategory = {
     subcategory_image: Joi.string().required().trim(),
     subcategory_name: Joi.string().required().trim(),
     subcategory_desc: Joi.string().required().trim(),
-    isActive: Joi.boolean().required()
+    isActive: Joi.boolean()
   }
 }
 

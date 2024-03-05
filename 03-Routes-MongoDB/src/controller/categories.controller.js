@@ -37,7 +37,7 @@ const listCategories = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: category,
-            message: 'Category List Successfully'
+            message: 'Get Category List Successfully'
         });
     } catch (error) {
         return res.status(500).json({

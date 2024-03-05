@@ -1,0 +1,231 @@
+openapi: 3.0.0
+info:
+  title: Ecommerce API
+  description: API for Ecommerce Service
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local server description, e.g. Local server
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+paths:
+  /category/create-category:
+    post:
+      tags:
+        - Category
+      summary: Create New Category.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                category_image:
+                  type: string
+                category_name:
+                  type: string
+                category_desc:
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/list-category:
+    get:
+      tags:
+        - Category
+      summary: Returns a list of Category.
+      description: Type Your Description Here.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/get-category/{categoryId}:
+    get:
+      tags:
+        - Category
+      summary: Returns a Category By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          description: The ID of the Category to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/update-category/{categoryId}:
+    put:
+      tags:
+        - Category
+      summary: Update Category By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          description: The ID of the Category to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_image:
+                  type: string
+                category_name:
+                  type: string
+                category_desc:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/delete-category/{categoryId}:
+    delete:
+      tags:
+        - Category
+      summary: Delete Category By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          description: The ID of the Category to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/count-active:
+    get:
+      tags:
+        - Category
+      summary: Returns a Total Active Category.
+      description: Type Your Description Here.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/list-subcategory:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a list of Subcategory.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
