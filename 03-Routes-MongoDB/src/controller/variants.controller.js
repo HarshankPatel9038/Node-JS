@@ -245,6 +245,11 @@ const listVariantByProductId = async (req, res) => {
             $push: '$attributes'
           }
         }
+      },
+      {
+        $project: {
+          _id: 0
+        }
       }
     ]);
 
@@ -306,8 +311,13 @@ const countStock = async (req, res) => {
             $first: '$result.name'
           },
           stock: {
-            $push: '$attributes.Quantity'
+            $sum: '$attributes.Quantity'
           }
+        }
+      },
+      {
+        $project: {
+          _id: 0
         }
       }
     ]);
@@ -359,9 +369,9 @@ const lowQuantity = async (req, res) => {
       },
       {
         $project: {
-          _id: '$product_id',
+          _id: 0,
           name: '$result.name',
-          price: '$attributes.Quantity'
+          Quantity: '$attributes.Quantity'
         }
       }
     ]);
@@ -413,7 +423,7 @@ const highPrice = async (req, res) => {
       },
       {
         $project: {
-          _id: '$product_id',
+          _id: 0,
           name: '$result.name',
           price: '$attributes.Price'
         }
@@ -474,6 +484,11 @@ const multipleVariants = async (req, res) => {
       {
         $match: {
           total_attributes: { $gt: 1 }
+        }
+      },
+      {
+        $project: {
+          _id: 0
         }
       }
     ]);
@@ -554,6 +569,11 @@ const countProducts = async (req, res) => {
           'total_variant': {
             $sum: 1
           },
+        }
+      },
+      {
+        $project: {
+          _id: 0
         }
       }
     ]);

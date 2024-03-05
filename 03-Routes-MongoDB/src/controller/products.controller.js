@@ -268,7 +268,7 @@ const listProductBySubcategory = async (req, res) => {
   }
 };
 
-const productByVariantDetail = async (req, res) => {
+const variantDetails = async (req, res) => {
 
   try {
     const productId = req.params.productId;
@@ -277,34 +277,31 @@ const productByVariantDetail = async (req, res) => {
     if (!productId) {
       return res.status(400).json({
         success: false,
-        message: 'Subcategory ID is required'
+        message: 'Product ID is required'
       });
     }
     const product = await Products.aggregate([
+      {
+        $match: {
+          _id: convertIdInNumber
+        }
+      },
       {
         $lookup: {
           from: 'variants',
           localField: '_id',
           foreignField: 'product_id',
-          as: 'result'
+          as: 'variants'
         }
       },
       {
         $unwind: {
-          path: '$result',
+          path: '$variants'
         }
       },
       {
-        $group: {
-          _id: '$_id',
-          variant: {
-            $push: '$result.attributes'
-          }
-        }
-      },
-      {
-        $match: {
-          '_id': convertIdInNumber
+        $project: {
+          'variants.product_id': 0
         }
       }
     ]);
@@ -312,14 +309,14 @@ const productByVariantDetail = async (req, res) => {
     if (!product || product.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'No Products found'
+        message: 'No variant found in this Products'
       });
     }
 
     return res.status(200).json({
       success: true,
       data: product,
-      message: 'Get Variant Detail By Product ID Successfully'
+      message: 'Get Variant By Product Id Successfully'
     });
   } catch (error) {
     return res.status(500).json({
@@ -511,7 +508,7 @@ module.exports = {
   searchByName,
   listProductByCategory,
   listProductBySubcategory,
-  productByVariantDetail,
+  variantDetails,
   topRated,
   newArrivals,
   outOfStock,

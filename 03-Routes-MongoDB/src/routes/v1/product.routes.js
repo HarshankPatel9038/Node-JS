@@ -50,6 +50,10 @@ route.get('/list/subcategory/:subcategoryId',
   productController.listProductBySubcategory
 );
 
+route.get('/variant-details/:productId',
+  productController.variantDetails
+);
+
 route.get('/top-rated',
   productController.topRated
 );
