@@ -34,8 +34,24 @@ route.delete('/delete-review/:reviewId',
   reviewController.deleteReviews
 );
 
-route.get('/user/:userId',
-  reviewController.user
+route.get('/user-with-product/:userId',
+  reviewController.userWithProduct
+);
+
+route.get('/top-rated-products',
+  reviewController.topRatedProducts
+);
+
+route.get('/review-with-user/:userId',
+  reviewController.reviewWithUser
+);
+
+route.get('/with-comments',
+  reviewController.withComments
+);
+
+route.get('/count-review-by-product',
+  reviewController.countReviewByProduct
 );
 
 module.exports = route;

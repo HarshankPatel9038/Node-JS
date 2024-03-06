@@ -26,199 +26,440 @@ const createReviews = async (req, res) => {
 const listReviews = async (req, res) => {
 
   try {
-      const review = await Reviews.find();
+    const review = await Reviews.find();
 
-      if (!review || review.length === 0) {
-          return res.status(404).json({
-              success: false,
-              message: 'No Review found'
-          });
-      }
-
-      return res.status(200).json({
-          success: true,
-          data: review,
-          message: 'Get Review List Successfully'
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Review found'
       });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'Get Review List Successfully'
+    });
   } catch (error) {
-      return res.status(500).json({
-          success: false,
-          message: 'Internal Server Error'
-      });
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
   }
 };
 
 const getReviews = async (req, res) => {
 
   try {
-      const reviewId = req.params.reviewId;
+    const reviewId = req.params.reviewId;
 
-      if (!reviewId) {
-          return res.status(400).json({
-              success: false,
-              message: 'Review ID is required'
-          });
-      }
-      const review = await Reviews.findById(reviewId);
-
-      if (!review || review.length === 0) {
-          return res.status(404).json({
-              success: false,
-              message: 'No Review found'
-          });
-      }
-
-      return res.status(200).json({
-          success: true,
-          data: review,
-          message: 'Review Get Successfully'
+    if (!reviewId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Review ID is required'
       });
+    }
+    const review = await Reviews.findById(reviewId);
+
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Review found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'Review Get Successfully'
+    });
   } catch (error) {
-      return res.status(500).json({
-          success: false,
-          message: 'Internal Server Error'
-      });
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
   }
 };
 
 const updateReviews = async (req, res) => {
   try {
-      const reviewId = req.params.reviewId;
-      const reviewUpdates = req.body;
+    const reviewId = req.params.reviewId;
+    const reviewUpdates = req.body;
 
-      if (!reviewId) {
-          return res.status(400).json({
-              success: false,
-              message: 'Review ID is required'
-          });
-      }
-
-      const updatedReview = await Reviews.findByIdAndUpdate(reviewId, reviewUpdates, { new: true });
-
-      if (!updatedReview) {
-          return res.status(404).json({
-              success: false,
-              message: 'Review not found'
-          });
-      }
-
-      return res.status(200).json({
-          success: true,
-          data: updatedReview,
-          message: 'Update Review Successfully'
+    if (!reviewId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Review ID is required'
       });
+    }
+
+    const updatedReview = await Reviews.findByIdAndUpdate(reviewId, reviewUpdates, { new: true });
+
+    if (!updatedReview) {
+      return res.status(404).json({
+        success: false,
+        message: 'Review not found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: updatedReview,
+      message: 'Update Review Successfully'
+    });
   } catch (error) {
-      return res.status(500).json({
-          success: false,
-          message: 'Internal Server Error'
-      });
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
   }
 };
 
 const deleteReviews = async (req, res) => {
   try {
-      const review = await Reviews.findByIdAndDelete(req.params.reviewId);
+    const review = await Reviews.findByIdAndDelete(req.params.reviewId);
 
-      if (!review) {
-          return res.status(404).json({
-              success: false,
-              message: 'review not found'
-          });
-      }
-
-      return res.status(200).json({
-          success: true,
-          data: review,
-          message: 'review deleted successfully'
+    if (!review) {
+      return res.status(404).json({
+        success: false,
+        message: 'review not found'
       });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'review deleted successfully'
+    });
   } catch (error) {
-      return res.status(500).json({
-          success: false,
-          message: 'Internal Server Error'
-      });
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
   }
 };
 
 
-const user = async (req, res) => {
+const userWithProduct = async (req, res) => {
 
   try {
-      const userId = req.params.userId;
-      const convertIdInNumber = +userId;
+    const userId = req.params.userId;
+    const convertIdInNumber = +userId;
 
-      if (!userId) {
-          return res.status(400).json({
-              success: false,
-              message: 'Review ID is required'
-          });
-      }
-      const review = await Reviews.aggregate([
-        {
-          $lookup: {
-            from: 'users',
-            localField: 'user_id',
-            foreignField: '_id',
-            as: 'users'
-          }
-        },
-        {
-          $unwind: {
-            path: '$users'
-          }
-        },
-        {
-          $lookup: {
-            from: 'products',
-            localField: 'product_id',
-            foreignField: '_id',
-            as: 'products'
-          }
-        },
-        {
-          $unwind: {
-            path: '$products'
-          }
-        },
-        {
-          $match: {
-            product_id: convertIdInNumber
-          }
-        },
-        {
-          $group: {
-            _id: '$users._id',
-            'review': {
-              $push: {
-                product_id: '$product_id',
-                product_name: '$products.name',
-                rating: '$rating',
-                comment: '$comment'
-              }
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Review ID is required'
+      });
+    }
+    const review = await Reviews.aggregate([
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user_id',
+          foreignField: '_id',
+          as: 'users'
+        }
+      },
+      {
+        $unwind: {
+          path: '$users'
+        }
+      },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'product_id',
+          foreignField: '_id',
+          as: 'products'
+        }
+      },
+      {
+        $unwind: {
+          path: '$products'
+        }
+      },
+      {
+        $match: {
+          product_id: convertIdInNumber
+        }
+      },
+      {
+        $group: {
+          _id: '$users._id',
+          'review': {
+            $push: {
+              product_id: '$product_id',
+              product_name: '$products.name',
+              rating: '$rating',
+              comment: '$comment'
             }
           }
         }
-      ]);
-
-      if (!review || review.length === 0) {
-          return res.status(404).json({
-              success: false,
-              message: 'No Review found'
-          });
       }
+    ]);
 
-      return res.status(200).json({
-          success: true,
-          data: review,
-          message: 'List all review of user with product data'
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Review found'
       });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'List all review of user with product data'
+    });
   } catch (error) {
-      return res.status(500).json({
-          success: false,
-          message: 'Internal Server Error'
-      });
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
   }
 };
 
+
+
+const topRatedProducts = async (req, res) => {
+
+  try {
+    const review = await Reviews.aggregate([
+      {
+        $group: {
+          _id: '$product_id',
+          'avg_rating': {
+            $avg: '$rating'
+          }
+        }
+      },
+      {
+        $sort: {
+          avg_rating: -1
+        }
+      },
+      {
+        $limit: 1
+      },
+      {
+        $lookup: {
+          from: 'products',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'products'
+        }
+      },
+      {
+        $unwind: {
+          path: '$products'
+        }
+      },
+      {
+        $project: {
+          _id: '$_id',
+          product_name: '$products.name',
+          avg_rating: 1
+        }
+      }
+    ]);
+
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Product found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'Retrieve products with the highest average ratings.'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+
+
+
+
+const reviewWithUser = async (req, res) => {
+
+  try {
+    const userId = req.params.userId;
+    const convertIdInNumber = +userId;
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'User ID is required'
+      });
+    }
+    const review = await Reviews.aggregate([
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user_id',
+          foreignField: '_id',
+          as: 'users'
+        }
+      },
+      {
+        $unwind: {
+          path: '$users'
+        }
+      },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'product_id',
+          foreignField: '_id',
+          as: 'products'
+        }
+      },
+      {
+        $unwind: {
+          path: '$products'
+        }
+      },
+      {
+        $match: {
+          user_id: convertIdInNumber
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          user_id: {
+            $first: '$user_id'
+          },
+          review: {
+            $push: {
+              user_name: '$users.name',
+              product_name: '$products.name',
+              rating: '$rating',
+              comment: '$comment'
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          _id: 0
+        }
+      }
+    ]);
+
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Review found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'List all review of user with product data'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+
+
+
+const withComments = async (req, res) => {
+
+  try {
+    const review = await Reviews.aggregate([
+      {
+        $match: {
+          comment: {
+            $exists: true
+          }
+        }
+      }
+    ]);
+
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Review found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'Get Review List Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+
+const countReviewByProduct = async (req, res) => {
+
+  try {
+    const review = await Reviews.aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'product_id',
+          foreignField: '_id',
+          as: 'products'
+        }
+      },
+      {
+        $unwind: {
+          path: '$products'
+        }
+      },
+      {
+        $group: {
+          _id: '$product_id',
+          product_name: {
+            $first: '$products.name'
+          },
+          total_review: {
+            $sum: 1
+          }
+        }
+      }
+    ]);
+
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Review found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'Get Review List Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
 
 module.exports = {
   createReviews,
@@ -226,5 +467,9 @@ module.exports = {
   getReviews,
   updateReviews,
   deleteReviews,
-  user
+  userWithProduct,
+  topRatedProducts,
+  reviewWithUser,
+  withComments,
+  countReviewByProduct
 }
