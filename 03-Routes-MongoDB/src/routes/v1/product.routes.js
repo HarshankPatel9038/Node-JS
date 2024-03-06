@@ -62,6 +62,10 @@ route.get('/new-arrivals',
   productController.newArrivals
 );
 
+route.get('/discounts',
+  productController.discounts
+);
+
 route.get('/out-of-stock',
   productController.outOfStock
 );

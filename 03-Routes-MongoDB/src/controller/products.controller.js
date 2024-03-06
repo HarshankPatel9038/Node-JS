@@ -418,6 +418,56 @@ const newArrivals = async (req, res) => {
   }
 };
 
+const discounts = async (req, res) => {
+
+  try {
+    const product = await Products.aggregate([
+      {
+        $lookup: {
+          from: 'variants',
+          localField: '_id',
+          foreignField: 'product_id',
+          as: 'variants'
+        }
+      },
+      {
+        $unwind: {
+          path: '$variants'
+        }
+      },
+      {
+        $match: {
+          'variants.attributes.Discount': {$gt: 0}
+        }
+      },
+      {
+        $project: {
+          product_name: '$name',
+          discount: '$variants.attributes.Discount'
+        }
+      }
+    ]);
+
+    if (!product || product.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Products found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: product,
+      message: 'Product Currently On Sale'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 const outOfStock = async (req, res) => {
 
   try {
@@ -511,6 +561,7 @@ module.exports = {
   variantDetails,
   topRated,
   newArrivals,
+  discounts,
   outOfStock,
   countProductByCategory
 }

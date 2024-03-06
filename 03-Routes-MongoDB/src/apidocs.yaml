@@ -1,8 +1,16 @@
 openapi: 3.0.0
 info:
+  version: 1.0.0
   title: Ecommerce API
   description: API for Ecommerce Service
-  version: 1.0.0
+  # termsOfService: 'https://mysite.com/terms'
+  #   contact:
+  #     name: 'Developer name'
+  #     email:
+  #     url:
+  #   license:
+  #     name:
+  #     url:
 servers:
   - url: http://localhost:3000/api/v1
     description: Local server description, e.g. Local server
@@ -959,6 +967,29 @@ paths:
       tags:
         - Product
       summary: Returns a recently added products.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request. User ID must be an integer and larger than 0.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/discounts:
+    get:
+      tags:
+        - Product
+      summary: Returns a products currently on sale.
       description: Type Your Description Here.
       responses:
         "200":

@@ -10,7 +10,12 @@ app.use('/api/v1', routes);
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./src/apidocs.yaml');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+var options = {
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: "Ecommerce API Documentation",
+    // customfavIcon: "/assets/favicon.ico",
+};
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 // start server
 app.listen(3000, () => {
