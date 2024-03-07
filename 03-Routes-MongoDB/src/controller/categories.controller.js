@@ -243,7 +243,58 @@ const mostProducts = async (req, res) => {
 const averageProducts = async (req, res) => {
 
     try {
-        const category = await Categories.aggregate();
+        const category = await Categories.aggregate([
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "_id",
+                    foreignField: "category_id",
+                    as: "products"
+                }
+            },
+            {
+                $addFields: {
+                    "productCount": { $size: "$products" }
+                }
+            },
+            {
+                $match: {
+                    productCount: { $gt: 0 }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    "totalProducts": { $sum: "$productCount" },
+                    data: { $push: '$$ROOT' }
+                }
+            },
+            {
+                $unwind: {
+                    path: '$data'
+                }
+            },
+            {
+                $addFields: {
+                    "percentage": {
+                        $multiply: [
+                            { $divide: ["$data.productCount", "$totalProducts"] },
+                            100
+                        ]
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    category_id: '$data._id',
+                    category_name: '$data.category_name',
+                    products: '$data.products',
+                    productCount: "$data.productCount",
+                    percentage: 1
+                }
+            }
+        ]);
 
         if (!category || category.length === 0) {
             return res.status(404).json({

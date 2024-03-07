@@ -42,6 +42,10 @@ route.get('/search/:productName',
   productController.searchByName
 );
 
+route.get('/search-product',
+  productController.searchProducts
+);
+
 route.get('/list/category/:categoryId',
   productController.listProductByCategory
 );

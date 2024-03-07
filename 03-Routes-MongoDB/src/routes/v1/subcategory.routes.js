@@ -52,6 +52,10 @@ route.get('/most-products',
     subcategoryController.mostProducts
 );
 
+route.get('/average-products',
+    subcategoryController.averageProducts
+);
+
 route.get('/inactive',
     subcategoryController.inActiveSubcategory
 );

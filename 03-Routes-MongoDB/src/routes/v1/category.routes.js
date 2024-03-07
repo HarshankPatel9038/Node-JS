@@ -43,31 +43,6 @@ route.get('/most-products',
     categoryController.mostProducts
 );
 
-// [
-//     {
-//       $lookup: {
-//         from: 'products',
-//         localField: '_id',
-//         foreignField: 'category_id',
-//         as: 'products'
-//       }
-//     },
-//     {
-//       $addFields: {
-//         products: {
-//           $size: '$products'
-//         }
-//       }
-//     },
-//     {
-//       $group: {
-//         _id: null,
-//         all_products: {
-//           $push: '$$ROOT'
-//         }
-//       }
-//     }
-//   ]
 route.get('/average-products',
     categoryController.averageProducts
 );

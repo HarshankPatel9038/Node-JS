@@ -396,6 +396,81 @@ const mostProducts = async (req, res) => {
   }
 };
 
+const averageProducts = async (req, res) => {
+  try {
+    const subcategory = await SubCategories.aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "_id",
+          foreignField: "subcategory_id",
+          as: "products"
+        }
+      },
+      {
+        $addFields: {
+          "productCount": { $size: "$products" }
+        }
+      },
+      {
+        $match: {
+          productCount: { $gt: 0 }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          "totalProducts": { $sum: "$productCount" },
+          data: { $push: '$$ROOT' }
+        }
+      },
+      {
+        $unwind: {
+          path: '$data'
+        }
+      },
+      {
+        $addFields: {
+          "percentage": {
+            $multiply: [
+              { $divide: ["$data.productCount", "$totalProducts"] },
+              100
+            ]
+          }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          subcategory_id: '$data._id',
+          subcategory_name: '$data.subcategory_name',
+          products: '$data.products',
+          productCount: "$data.productCount",
+          percentage: 1
+        }
+      }
+    ]);
+
+    if (!subcategory || subcategory.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No subcategory found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: subcategory,
+      message: 'Get Average Product Subcategory Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 const inActiveSubcategory = async (req, res) => {
   try {
     const subcategory = await SubCategories.aggregate([
@@ -488,6 +563,7 @@ module.exports = {
   // listByCategory,
   countActiveSubcategory,
   mostProducts,
+  averageProducts,
   inActiveSubcategory,
   countProducts
 }

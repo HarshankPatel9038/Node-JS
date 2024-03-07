@@ -188,6 +188,84 @@ const searchByName = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  try {
+    const { sortOrder = 1, rating, max, min = 0, category, page = 1, limit = 10 } = req.body
+
+    let matchMerge = {};
+
+    if (category) matchMerge.category_id = parseInt(category);
+
+    if (rating) matchMerge.avg_rating = { $gte: rating };
+
+    if (min !== undefined && max !== undefined) {
+      matchMerge['variants.attributes.Price'] = { $gte: min, $lte: max };
+    } else if (max !== undefined) {
+      matchMerge['variants.attributes.Price'] = { $lte: max };
+    }
+
+    let pipeline = [
+      {
+        $lookup: {
+          from: 'reviews',
+          localField: '_id',
+          foreignField: 'product_id',
+          as: 'reviews'
+        }
+      },
+      {
+        $lookup: {
+          from: 'variants',
+          localField: '_id',
+          foreignField: 'product_id',
+          as: 'variants'
+        }
+      },
+      {
+        $addFields: {
+          avg_rating: {
+            $avg: '$reviews.rating'
+          }
+        }
+      },
+      {
+        $match: matchMerge
+      },
+      {
+        $skip: (page - 1) * limit
+      },
+      {
+        $limit: limit
+      },
+      {
+        $sort: {
+          'variants.attributes.Price': sortOrder
+        }
+      }
+    ]
+
+    const product = await Products.aggregate(pipeline);
+
+    if (!product || product.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Products found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: product,
+      message: 'Product Filter Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 const listProductByCategory = async (req, res) => {
 
   try {
@@ -437,7 +515,7 @@ const discounts = async (req, res) => {
       },
       {
         $match: {
-          'variants.attributes.Discount': {$gt: 0}
+          'variants.attributes.Discount': { $gt: 0 }
         }
       },
       {
@@ -555,6 +633,7 @@ module.exports = {
   getProducts,
   updateProduct,
   deleteProduct,
+  searchProducts,
   searchByName,
   listProductByCategory,
   listProductBySubcategory,

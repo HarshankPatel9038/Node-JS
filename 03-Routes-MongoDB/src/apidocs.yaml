@@ -237,29 +237,29 @@ paths:
                 type: array
                 items:
                   type: string
-  # /category/average-products:
-  #   get:
-  #     tags:
-  #       - Category
-  #     summary: Returns a average number of products per category.
-  #     description: Type Your Description Here.
-  #     responses:
-  #       '200':
-  #         description: OK
-  #       '400':
-  #         description: Bad request. User ID must be an integer and larger than 0.
-  #       '401':
-  #         description: Authorization information is missing or invalid.
-  #       '404':
-  #         description: A user with the specified ID was not found.
-  #       '5XX':
-  #         description: Unexpected error.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 type: string
+  /category/average-products:
+    get:
+      tags:
+        - Category
+      summary: Returns a average number of products per category.
+      description: Type Your Description Here.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. User ID must be an integer and larger than 0.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
   /category/inactive:
     get:
       tags:
@@ -560,29 +560,29 @@ paths:
                 type: array
                 items:
                   type: string
-  # /subcategory/average-products:
-  #   get:
-  #     tags:
-  #       - Subcategory
-  #     summary: Returns a average number of products per subcategory.
-  #     description: Optional extended description in CommonMark or HTML.
-  #     responses:
-  #       "200":
-  #         description: OK
-  #       "400":
-  #         description: Bad request. User ID must be an integer and larger than 0.
-  #       "401":
-  #         description: Authorization information is missing or invalid.
-  #       "404":
-  #         description: A user with the specified ID was not found.
-  #       "5XX":
-  #         description: Unexpected error.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 type: string
+  /subcategory/average-products:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a average number of products per subcategory.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request. User ID must be an integer and larger than 0.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
   /subcategory/inactive:
     get:
       tags:
@@ -826,6 +826,29 @@ paths:
           description: The Name of the Product to return.
           schema:
             type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request. User ID must be an integer and larger than 0.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/search-product:
+    get:
+      tags:
+        - Product
+      summary: Returns a Product With Filter.
+      description: Type Your Description Here.
       responses:
         "200":
           description: OK
