@@ -2,7 +2,7 @@ const express = require('express');
 const { productController } = require('../../controller');
 const validate = require('../../middleware/validate');
 const { productValidation } = require('../../validation');
-const route = express.Router();
+const router = express.Router();
 
 
 // {
@@ -15,67 +15,67 @@ const route = express.Router();
 //   "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
 //   "isActive": false
 // }
-route.post('/create-products',
+router.post('/create-products',
   validate(productValidation.createProduct),
   productController.createProducts
 );
 
-route.get('/list-products',
+router.get('/list-products',
   productController.listProducts
 );
 
-route.get('/get-products/:productId',
+router.get('/get-products/:productId',
   productController.getProducts
 );
 
-route.put('/update-products/:productId',
+router.put('/update-products/:productId',
   validate(productValidation.updateProduct),
   productController.updateProduct
 );
 
-route.delete('/delete-products/:productId',
+router.delete('/delete-products/:productId',
   validate(productValidation.deleteProduct),
   productController.deleteProduct
 );
 
-route.get('/search/:productName',
+router.get('/search/:productName',
   productController.searchByName
 );
 
-route.get('/search-product',
+router.get('/search-product',
   productController.searchProducts
 );
 
-route.get('/list/category/:categoryId',
+router.get('/list/category/:categoryId',
   productController.listProductByCategory
 );
 
-route.get('/list/subcategory/:subcategoryId',
+router.get('/list/subcategory/:subcategoryId',
   productController.listProductBySubcategory
 );
 
-route.get('/variant-details/:productId',
+router.get('/variant-details/:productId',
   productController.variantDetails
 );
 
-route.get('/top-rated',
+router.get('/top-rated',
   productController.topRated
 );
 
-route.get('/new-arrivals',
+router.get('/new-arrivals',
   productController.newArrivals
 );
 
-route.get('/discounts',
+router.get('/discounts',
   productController.discounts
 );
 
-route.get('/out-of-stock',
+router.get('/out-of-stock',
   productController.outOfStock
 );
 
-route.get('/count-categories',
+router.get('/count-categories',
   productController.countProductByCategory
 );
 
-module.exports = route;
+module.exports = router;

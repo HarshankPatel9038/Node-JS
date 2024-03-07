@@ -2,7 +2,7 @@ const express = require('express');
 const validate = require('../../middleware/validate');
 const { subcategoryValidation } = require('../../validation');
 const { subcategoryController } = require('../../controller');
-const route = express.Router();
+const router = express.Router();
 
 
 // {
@@ -13,55 +13,55 @@ const route = express.Router();
 //     "subcategory_desc": "gdvhvxv svx vgvds vjhdsgvjhcx gvjhxgv xcjvhgx vjhxcgvjhxg vjhxcg vjx gvgvjvgxcv",
 //     "isActive": false
 // }
-route.post('/create-subcategory',
+router.post('/create-subcategory',
     validate(subcategoryValidation.createSubcategory),
     subcategoryController.createSubcategories
 );
 
-route.get('/list-subcategory',
+router.get('/list-subcategory',
     subcategoryController.listSubcategories
 );
 
-route.get('/get-subcategory/:categoryId',
+router.get('/get-subcategory/:categoryId',
     subcategoryController.getSubcategories
 );
 
-route.put('/update-subcategory/:subcategoryId',
+router.put('/update-subcategory/:subcategoryId',
     validate(subcategoryValidation.updateSubcategory),
     subcategoryController.updateSubcategories
 );
 
-route.delete('/delete-subcategory/:subcategoryId',
+router.delete('/delete-subcategory/:subcategoryId',
     validate(subcategoryValidation.deleteSubcategory),
     subcategoryController.deleteSubcategory
 );
 
-route.get('/parent-of-subcategory/:subcategoryId',
+router.get('/parent-of-subcategory/:subcategoryId',
     subcategoryController.parentOfSubcategory
 );
 
-// route.get('/list-by-category/:subcategoryId',
+// router.get('/list-by-category/:subcategoryId',
 //     subcategoryController.listByCategory
 // );
 
-route.get('/count-active',
+router.get('/count-active',
     subcategoryController.countActiveSubcategory
 );
 
-route.get('/most-products',
+router.get('/most-products',
     subcategoryController.mostProducts
 );
 
-route.get('/average-products',
+router.get('/average-products',
     subcategoryController.averageProducts
 );
 
-route.get('/inactive',
+router.get('/inactive',
     subcategoryController.inActiveSubcategory
 );
 
-route.get('/count-products',
+router.get('/count-products',
     subcategoryController.countProducts
 );
 
-module.exports = route;
+module.exports = router;

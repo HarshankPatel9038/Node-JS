@@ -1,5 +1,5 @@
 const express = require('express');
-const route = express.Router();
+const router = express.Router();
 const validate = require('../../middleware/validate');
 const { reviewValidation } = require('../../validation');
 const { reviewController } = require('../../controller');
@@ -11,47 +11,47 @@ const { reviewController } = require('../../controller');
 //   "rating": 4.2,
 //   "comment": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
 // }
-route.post('/create-review',
+router.post('/create-review',
   validate(reviewValidation.createReview),
   reviewController.createReviews
 );
 
-route.get('/list-review',
+router.get('/list-review',
   reviewController.listReviews
 );
 
-route.get('/get-review/:reviewId',
+router.get('/get-review/:reviewId',
   reviewController.getReviews
 );
 
-route.put('/update-review/:reviewId',
+router.put('/update-review/:reviewId',
   validate(reviewValidation.updateReview),
   reviewController.updateReviews
 );
 
-route.delete('/delete-review/:reviewId',
+router.delete('/delete-review/:reviewId',
   validate(reviewValidation.deleteReview),
   reviewController.deleteReviews
 );
 
-route.get('/user-with-product/:userId',
+router.get('/user-with-product/:userId',
   reviewController.userWithProduct
 );
 
-route.get('/top-rated-products',
+router.get('/top-rated-products',
   reviewController.topRatedProducts
 );
 
-route.get('/review-with-user/:userId',
+router.get('/review-with-user/:userId',
   reviewController.reviewWithUser
 );
 
-route.get('/with-comments',
+router.get('/with-comments',
   reviewController.withComments
 );
 
-route.get('/count-review-by-product',
+router.get('/count-review-by-product',
   reviewController.countReviewByProduct
 );
 
-module.exports = route;
+module.exports = router;

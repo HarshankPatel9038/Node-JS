@@ -2,7 +2,7 @@ const express = require('express');
 const { variantController } = require('../../controller');
 const validate = require('../../middleware/validate');
 const { variantValidation } = require('../../validation');
-const route = express.Router();
+const router = express.Router();
 
 
 // {
@@ -16,59 +16,59 @@ const route = express.Router();
 //   },
 //   "isActive": false
 // }
-route.post('/create-variant',
+router.post('/create-variant',
   validate(variantValidation.createVariant),
   variantController.createVariants
 );
 
-route.get('/list-variant',
+router.get('/list-variant',
   variantController.listVariants
 );
 
-route.get('/get-variant/:variantId',
+router.get('/get-variant/:variantId',
   variantController.getVariants
 );
 
-route.put('/update-variant/:variantId',
+router.put('/update-variant/:variantId',
   validate(variantValidation.updateVariant),
   variantController.updateVariants
 );
 
-route.delete('/delete-variant/:variantId',
+router.delete('/delete-variant/:variantId',
   validate(variantValidation.deleteVariant),
   variantController.deleteVariant
 );
 
-route.get('/product/:productId',
+router.get('/product/:productId',
   variantController.product
 );
 
-route.get('/list-variant/:productId',
+router.get('/list-variant/:productId',
   variantController.listVariantByProductId
 );
 
-route.get('/count-stock/:productId',
+router.get('/count-stock/:productId',
   variantController.countStock
 );
 
-route.get('/low-quantity',
+router.get('/low-quantity',
   variantController.lowQuantity
 );
 
-route.get('/high-price',
+router.get('/high-price',
   variantController.highPrice
 );
 
-route.get('/multiple-variants',
+router.get('/multiple-variants',
   variantController.multipleVariants
 );
 
-route.get('/active',
+router.get('/active',
   variantController.activeVariant
 );
 
-route.get('/count-products',
+router.get('/count-products',
   variantController.countProducts
 );
 
-module.exports = route;
+module.exports = router;
