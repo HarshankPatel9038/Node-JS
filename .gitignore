@@ -41,7 +41,7 @@ build/Release
 # Dependency directories
 01-Intro/node_modules/
 02-Express/node_modules/
-03-Routes-MongoDB/node_modules/
+03-API/node_modules/
 Institute/node_modules/
 jspm_packages/
 
@@ -74,7 +74,7 @@ web_modules/
 
 # dotenv environment variables file
 .env
-03-Routes-MongoDB/.env
+03-API/.env
 Institute/.env
 .env.test
 .env.production
