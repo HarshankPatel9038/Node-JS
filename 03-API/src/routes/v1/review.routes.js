@@ -38,6 +38,14 @@ router.get('/user-with-product/:userId',
   reviewController.userWithProduct
 );
 
+router.get('/list-review-by-product/:productId',
+  reviewController.listReviewsByProduct
+);
+
+router.get('/no-reviews',
+  reviewController.noReviews
+);
+
 router.get('/top-rated-products',
   reviewController.topRatedProducts
 );

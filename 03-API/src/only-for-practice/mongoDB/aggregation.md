@@ -350,6 +350,20 @@
 
 
 12. Find users who have posts with more than 15 likes and a specific skill.
+[
+  {
+    $unwind: {
+      path: '$posts'
+    }
+  },
+  {
+    $match: {
+      'posts.likes': {$gt: 15},
+      'skills': {$eq: 'JavaScript'}
+    }
+  }
+]
+
 
 
 13. Find users with the highest total number of likes across all posts.
@@ -376,6 +390,25 @@
 
 
 15. Find users who have at least one post with a specific comment and a specific skill.
+[
+  {
+    $addFields: {
+        "total_post": { $size: "$posts" }
+    }
+  },
+  {
+    $match: {
+      'total_post': {$gt: 0}
+    }
+  },
+  {
+    $match: {
+      'posts.likes': {$gt: 15},
+      'skills': {$eq: 'JavaScript'},
+      'posts.comments': {$eq: 'Awesome'}
+    }
+  }
+]
 
 
 
@@ -394,6 +427,16 @@
 
 
 17. count user who have second skills as React
+[
+  {
+    "$match": {
+      'skills.1': "React"
+    }
+  },
+  {
+    $count: "total_users_with_react_as_second_skill"
+  }
+]
 
 
 
@@ -419,6 +462,13 @@
 
 
 20. Add a "postCount" field representing the total number of posts for each user.
+[
+  {
+    $addFields: {
+        "total_post": { $size: "$posts" }
+    }
+  }
+]
 
 
 
@@ -427,3 +477,32 @@
 
 
 22. Display posts data that have more than 1 comments.
+[
+  {
+    $unwind: {
+      path: '$posts'
+    }
+  },
+  {
+    $addFields: {
+        total_comments: { $size: "$posts.comments" }
+    }
+  },
+  {
+    $match: {
+      total_comments: {$gt: 1}
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      age: 0,
+      city: 0,
+      gender: 0,
+      friends: 0,
+      skills: 0,
+      isActive: 0,
+      full_name: 0,
+    }
+  }
+]

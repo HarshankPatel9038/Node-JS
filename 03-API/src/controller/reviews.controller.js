@@ -22,7 +22,6 @@ const createReviews = async (req, res) => {
   }
 };
 
-
 const listReviews = async (req, res) => {
 
   try {
@@ -122,7 +121,7 @@ const deleteReviews = async (req, res) => {
     if (!review) {
       return res.status(404).json({
         success: false,
-        message: 'review not found'
+        message: 'review Not Found'
       });
     }
 
@@ -139,7 +138,6 @@ const deleteReviews = async (req, res) => {
   }
 };
 
-
 const userWithProduct = async (req, res) => {
 
   try {
@@ -149,7 +147,7 @@ const userWithProduct = async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
-        message: 'Review ID is required'
+        message: 'User ID is required'
       });
     }
     const review = await Reviews.aggregate([
@@ -219,7 +217,91 @@ const userWithProduct = async (req, res) => {
   }
 };
 
+const listReviewsByProduct  = async (req, res) => {
 
+  try {
+    const productId = req.params.productId;
+    const convertIdInNumber = +productId;
+
+    if (!productId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Product ID is required'
+      });
+    }
+    const review = await Reviews.aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'product_id',
+          foreignField: '_id',
+          as: 'products'
+        }
+      },
+      {
+        $unwind: {
+          path: '$products'
+        }
+      },
+      {
+        $match: {
+          product_id: {$eq: convertIdInNumber}
+        }
+      },
+      {
+        $project: {
+          _id: '$product_id',
+          product_name: '$products.name',
+          rating: '$rating',
+          comment: '$comment'
+        }
+      }
+    ]);
+
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Product found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'Retrieve products with the highest average ratings.'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const noReviews  = async (req, res) => {
+
+  try {
+    const review = await Reviews.aggregate();
+
+    if (!review || review.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No Product found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: review,
+      message: 'Retrieve products with the highest average ratings.'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
 
 const topRatedProducts = async (req, res) => {
 
@@ -282,10 +364,6 @@ const topRatedProducts = async (req, res) => {
     });
   }
 };
-
-
-
-
 
 const reviewWithUser = async (req, res) => {
 
@@ -374,9 +452,6 @@ const reviewWithUser = async (req, res) => {
   }
 };
 
-
-
-
 const withComments = async (req, res) => {
 
   try {
@@ -409,7 +484,6 @@ const withComments = async (req, res) => {
     });
   }
 };
-
 
 const countReviewByProduct = async (req, res) => {
 
@@ -468,6 +542,8 @@ module.exports = {
   updateReviews,
   deleteReviews,
   userWithProduct,
+  listReviewsByProduct,
+  noReviews,
   topRatedProducts,
   reviewWithUser,
   withComments,

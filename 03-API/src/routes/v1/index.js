@@ -14,6 +14,6 @@ router.use('/subcategory', subcategory);
 router.use('/variant', variant);
 router.use('/product', product);
 router.use('/review', review);
-router.use('/users', user);
+router.use('/user', user);
 
 module.exports = router;

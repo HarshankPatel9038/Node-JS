@@ -1,9 +1,14 @@
 const express = require('express');
+const { userController } = require('../../controller');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    console.log('Users Get Successfully');
-});
+router.get('/list-user',
+    userController.listUser
+);
+
+router.get('/get-user/:userId',
+    userController.getUser
+);
 
 module.exports = router;
