@@ -49,14 +49,17 @@ SELECT * FROM customer WHERE cname LIKE 'a%' OR cname LIKE 'g%'
 SELECT * FROM orders WHERE amt != 0 OR amt IS NOT NULL
 
 18. Count the number of salespeople currently listing orders in the order table
+SELECT COUNT(DISTINCT(snum)) FROM orders
 
 19. Largest order taken by each sales order value more than $3000.
 
 20. Which day had the highest total amount ordered?
 
 21. Count all orders for 10 June.
+SELECT ODATE, COUNT(ODATE) FROM orders WHERE ODATE='10-JUN-94'
 
 22. Count the number of different non-null city values in customers table.
+SELECT COUNT(DISTINCT(city)) FROM customer
 
 23. Assume that each salesperson has a commission of 12%. Produce order no, salesman no and amount salesman commission for each day and place the result in descending order.
 
