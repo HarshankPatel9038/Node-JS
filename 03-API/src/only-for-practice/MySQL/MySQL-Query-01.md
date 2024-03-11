@@ -41,6 +41,11 @@ SELECT cnum, cname, rating, snum FROM customer
 SELECT * FROM orders WHERE odate BETWEEN '10-MAR-94' AND '10-APR-94'
 
 15. All customers services by Peel or Motika.
+SELECT customer.CNUM, customer.CNAME, customer.CITY, customer.RATING, customer.SNUM
+FROM customer
+INNER JOIN salespeople
+ON salespeople.Snum = customer.SNUM
+WHERE salespeople.Sname='Peel' OR salespeople.Sname='Motika'
 
 16. All customers whose names begin with a letter A or G.
 SELECT * FROM customer WHERE cname LIKE 'a%' OR cname LIKE 'g%'
@@ -62,7 +67,10 @@ SELECT ODATE, COUNT(ODATE) FROM orders WHERE ODATE='10-JUN-94'
 SELECT COUNT(DISTINCT(city)) FROM customer
 
 23. Assume that each salesperson has a commission of 12%. Produce order no, salesman no and amount salesman commission for each day and place the result in descending order.
+SELECT onum, snum, (amt * 0.12) AS COMM_AMT FROM orders ORDER BY COMM_AMT DESC
 
 24. Find salespeople no, who have multiple customers.
+SELECT snum FROM customer GROUP BY snum HAVING COUNT(cnum) > 1
 
 25. Extract rows of all salespeople with more than one current order.
+SELECT snum, COUNT(SNUM) FROM orders GROUP BY snum HAVING snum > 1
