@@ -44,7 +44,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -67,7 +67,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -90,7 +90,7 @@ paths:
         - name: categoryId
           in: path
           required: true
-          description: The ID of the Category to return.
+          # description: The ID of the Category to return.
           schema:
             type: integer
             format: int64
@@ -99,7 +99,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -122,7 +122,7 @@ paths:
         - name: categoryId
           in: path
           required: true
-          description: The ID of the Category to Update.
+          # description: The ID of the Category to Update.
           schema:
             type: integer
             format: int64
@@ -146,7 +146,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -169,7 +169,7 @@ paths:
         - name: categoryId
           in: path
           required: true
-          description: The ID of the Category to Delete.
+          # description: The ID of the Category to Delete.
           schema:
             type: integer
             format: int64
@@ -178,7 +178,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -201,7 +201,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -224,7 +224,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -247,7 +247,7 @@ paths:
         '200':
           description: OK
         '400':
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         '401':
           description: Authorization information is missing or invalid.
         '404':
@@ -270,7 +270,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -293,7 +293,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -333,7 +333,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -356,7 +356,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -379,7 +379,7 @@ paths:
         - name: categoryId
           in: path
           required: true
-          description: The ID of the Category to return.
+          # description: The ID of the Category to return.
           schema:
             type: integer
             format: int64
@@ -388,7 +388,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -411,7 +411,7 @@ paths:
         - name: subcategoryId
           in: path
           required: true
-          description: The ID of the Subcategory to Update.
+          # description: The ID of the Subcategory to Update.
           schema:
             type: integer
             format: int64
@@ -437,7 +437,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -460,7 +460,7 @@ paths:
         - name: subcategoryId
           in: path
           required: true
-          description: The ID of the Subcategory to Delete.
+          # description: The ID of the Subcategory to Delete.
           schema:
             type: integer
             format: int64
@@ -469,7 +469,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -492,7 +492,7 @@ paths:
         - name: subcategoryId
           in: path
           required: true
-          description: The ID of the Category to return.
+          # description: The ID of the Category to return.
           schema:
             type: integer
             format: int64
@@ -501,7 +501,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -524,7 +524,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -547,7 +547,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -570,7 +570,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -593,7 +593,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -616,7 +616,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -660,7 +660,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -683,7 +683,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -706,7 +706,7 @@ paths:
         - name: productId
           in: path
           required: true
-          description: The ID of the Product to return.
+          # description: The ID of the Product to return.
           schema:
             type: integer
             format: int64
@@ -715,7 +715,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -738,7 +738,7 @@ paths:
         - name: productId
           in: path
           required: true
-          description: The ID of the ProductId to Update.
+          # description: The ID of the ProductId to Update.
           schema:
             type: integer
             format: int64
@@ -768,7 +768,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -791,7 +791,7 @@ paths:
         - name: productId
           in: path
           required: true
-          description: The ID of the ProductId to Delete.
+          # description: The ID of the ProductId to Delete.
           schema:
             type: integer
             format: int64
@@ -800,7 +800,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -830,7 +830,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -853,7 +853,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -876,7 +876,7 @@ paths:
         - name: categoryId
           in: path
           required: true
-          description: The ID of the Category to return.
+          # description: The ID of the Category to return.
           schema:
             type: integer
             format: int64
@@ -885,7 +885,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -908,7 +908,7 @@ paths:
         - name: subcategoryId
           in: path
           required: true
-          description: The ID of the Subcategory to return.
+          # description: The ID of the Subcategory to return.
           schema:
             type: integer
             format: int64
@@ -917,7 +917,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -940,7 +940,7 @@ paths:
         - name: productId
           in: path
           required: true
-          description: The ID of the Subcategory to return.
+          # description: The ID of the Subcategory to return.
           schema:
             type: integer
             format: int64
@@ -949,7 +949,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -972,7 +972,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -995,7 +995,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1018,7 +1018,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1041,7 +1041,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1064,7 +1064,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1109,7 +1109,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1132,7 +1132,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1155,7 +1155,7 @@ paths:
         - name: variantId
           in: path
           required: true
-          description: The ID of the Variant to return.
+          # description: The ID of the Variant to return.
           schema:
             type: integer
             format: int64
@@ -1164,7 +1164,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1187,7 +1187,7 @@ paths:
         - name: variantId
           in: path
           required: true
-          description: The ID of the Variant to Update.
+          # description: The ID of the Variant to Update.
           schema:
             type: integer
             format: int64
@@ -1218,7 +1218,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1241,7 +1241,7 @@ paths:
         - name: variantId
           in: path
           required: true
-          description: The ID of the Variant to Delete.
+          # description: The ID of the Variant to Delete.
           schema:
             type: integer
             format: int64
@@ -1250,7 +1250,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1273,7 +1273,7 @@ paths:
         - name: productId
           in: path
           required: true
-          description: The ID of the Product to return.
+          # description: The ID of the Product to return.
           schema:
             type: integer
             format: int64
@@ -1282,7 +1282,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1305,7 +1305,7 @@ paths:
         - name: productId
           in: path
           required: true
-          description: The ID of the Product to return.
+          # description: The ID of the Product to return.
           schema:
             type: integer
             format: int64
@@ -1314,7 +1314,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1337,7 +1337,7 @@ paths:
         - name: productId
           in: path
           required: true
-          description: The ID of the Product to return.
+          # description: The ID of the Product to return.
           schema:
             type: integer
             format: int64
@@ -1346,7 +1346,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1369,7 +1369,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1392,7 +1392,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1415,7 +1415,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1438,7 +1438,7 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":
@@ -1461,7 +1461,371 @@ paths:
         "200":
           description: OK
         "400":
-          description: Bad request. User ID must be an integer and larger than 0.
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/create-review:
+    post:
+      tags:
+        - Review
+      summary: Create New Review.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                user_id:
+                  type: number
+                product_id:
+                  type: number
+                rating:
+                  type: number
+                comment:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/list-review:
+    get:
+      tags:
+        - Review
+      summary: Returns a list of Review.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/get-review/{reviewId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a Review By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          # description: The ID of the Review to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/update-review/{reviewId}:
+    put:
+      tags:
+        - Review
+      summary: Update Review By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          # description: The ID of the Review to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: number
+                product_id:
+                  type: number
+                rating:
+                  type: number
+                comment:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/delete-review/{reviewId}:
+    delete:
+      tags:
+        - Review
+      summary: Delete Review By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          # description: The ID of the Review to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/user-with-product/{userId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a User With Product By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/list-review-by-product/{productId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a Review List By Product Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Product to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request. Product ID must be an integer and larger than 0.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  # /review/no-reviews:
+  #   get:
+  #     tags:
+  #       - Review
+  #     summary: Returns a list of No Review.
+  #     description: Type Your Description Here.
+  #     responses:
+  #       "200":
+  #         description: OK
+  #       "400":
+  #         description: Bad request.
+  #       "401":
+  #         description: Authorization information is missing or invalid.
+  #       "404":
+  #         description: A user with the specified ID was not found.
+  #       "5XX":
+  #         description: Unexpected error.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 type: string
+  /review/top-rated-products:
+    get:
+      tags:
+        - Review
+      summary: Returns a list of Top Rated Products.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/review-with-user/{userId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a Review With User By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the Review to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/with-comments:
+    get:
+      tags:
+        - Review
+      summary: Returns a list of Reviews With Comment.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/count-review-by-product:
+    get:
+      tags:
+        - Review
+      summary: Returns a Count Of Review By Product.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
         "401":
           description: Authorization information is missing or invalid.
         "404":

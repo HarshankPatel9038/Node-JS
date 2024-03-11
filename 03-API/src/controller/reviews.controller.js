@@ -179,20 +179,17 @@ const userWithProduct = async (req, res) => {
       },
       {
         $match: {
-          product_id: convertIdInNumber
+          user_id: convertIdInNumber
         }
       },
       {
-        $group: {
-          _id: '$users._id',
-          'review': {
-            $push: {
-              product_id: '$product_id',
-              product_name: '$products.name',
-              rating: '$rating',
-              comment: '$comment'
-            }
-          }
+        $project: {
+          _id: 0,
+          user_id: '$user_id',
+          user_name: '$users.name',
+          product_name: '$products.name',
+          rating: '$rating',
+          comment: '$comment'
         }
       }
     ]);
