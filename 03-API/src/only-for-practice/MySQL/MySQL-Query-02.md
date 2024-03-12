@@ -80,3 +80,14 @@ WHERE orders.ODATE = '10-MAR-94'
 
 
 09. Find all salespeople who have customers in their cities who they don’t service.
+SELECT customer.CNAME
+FROM customer
+INNER JOIN salespeople
+ON salespeople.Snum = customer.SNUM
+WHERE salespeople.City = customer.CITY
+UNION ALL
+SELECT customer.CNAME
+FROM customer
+LEFT OUTER JOIN orders
+ON customer.CNUM = orders.CNUM
+WHERE orders.CNUM IS NULL
