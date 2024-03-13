@@ -59,6 +59,10 @@ SELECT COUNT(DISTINCT(snum)) FROM orders
 19. Largest order taken by each sales order value more than $3000.
 
 20. Which day had the highest total amount ordered?
+SELECT ODATE, SUM(orders.AMT) AS 'Total Amount'
+FROM orders
+GROUP BY ODATE
+HAVING SUM(orders.AMT)
 
 21. Count all orders for 10 June.
 SELECT ODATE, COUNT(ODATE) FROM orders WHERE ODATE='10-JUN-94'

@@ -40,10 +40,10 @@ WHERE cnum IN (
 )
 
 
-05. Count the customers with rating above San Jose’s average.
-SELECT COUNT(CNAME) AS 'Total Customer'
+05. Count the customers with rating is equal or above San Jose’s average.
+SELECT COUNT(cnum) AS 'Total Customer'
 FROM customer
-WHERE RATING > (
+WHERE RATING >= (
     SELECT AVG(RATING)
     FROM customer
     WHERE CITY = 'San Jose'
@@ -51,10 +51,24 @@ WHERE RATING > (
 
 
 06. Find name and number of salespeople who have more than or a customer.
+SELECT SNUM, sname
+FROM salespeople
+WHERE SNUM = (
+    SELECT SNUM
+    FROM customer
+    GROUP BY SNUM
+    HAVING COUNT(CNUM) > 1
+)
 
 
 07. Find total amount in orders for each salesperson for whom this total is greater than the amount of the largest order in the order table.
-
+SELECT snum, SUM(amt) AS 'Max Amount'
+FROM orders
+GROUP BY snum
+HAVING SUM(amt) > (
+    SELECT MAX(amt)
+    FROM orders
+)
 
 
 08. All orders credited to the same salesperson who services Hoffman.
@@ -76,3 +90,11 @@ HAVING SUM(orders.AMT) >= (
 )
 
 10. Find salespeople number, name, and city who have multiple customers.
+SELECT SNUM, sname, city
+FROM salespeople
+WHERE SNUM = (
+    SELECT SNUM
+    FROM customer
+    GROUP BY SNUM
+    HAVING COUNT(CNUM) > 1
+)

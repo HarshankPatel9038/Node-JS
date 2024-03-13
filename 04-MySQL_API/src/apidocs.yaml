@@ -1,0 +1,1840 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Ecommerce API
+  description: API for Ecommerce Service
+  # termsOfService: 'https://mysite.com/terms'
+  #   contact:
+  #     name: 'Developer name'
+  #     email:
+  #     url:
+  #   license:
+  #     name:
+  #     url:
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local server description, e.g. Local server
+  # - url: http://api.example.com/v1
+  #   description: Optional server description, e.g. Main (production) server
+  # - url: http://staging-api.example.com
+  #   description: Optional server description, e.g. Internal staging server for testing
+paths:
+  /category/create-category:
+    post:
+      tags:
+        - Category
+      summary: Create New Category.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                category_image:
+                  type: string
+                category_name:
+                  type: string
+                category_desc:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/list-category:
+    get:
+      tags:
+        - Category
+      summary: Returns a list of Category.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/get-category/{categoryId}:
+    get:
+      tags:
+        - Category
+      summary: Returns a Category By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          # description: The ID of the Category to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/update-category/{categoryId}:
+    put:
+      tags:
+        - Category
+      summary: Update Category By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          # description: The ID of the Category to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_image:
+                  type: string
+                category_name:
+                  type: string
+                category_desc:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/delete-category/{categoryId}:
+    delete:
+      tags:
+        - Category
+      summary: Delete Category By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          # description: The ID of the Category to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/count-active:
+    get:
+      tags:
+        - Category
+      summary: Returns a total count of active categories.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/most-products:
+    get:
+      tags:
+        - Category
+      summary: Returns a categories with the highest number of products.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/average-products:
+    get:
+      tags:
+        - Category
+      summary: Returns a average number of products per category.
+      description: Type Your Description Here.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '5XX':
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/inactive:
+    get:
+      tags:
+        - Category
+      summary: Returns a list of inactive categories.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /category/count-subcategories:
+    get:
+      tags:
+        - Category
+      summary: Returns a count of subcategories for each category.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/create-subcategory:
+    post:
+      tags:
+        - Subcategory
+      summary: Create New Subcategory.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                category_id:
+                  type: number
+                subcategory_image:
+                  type: string
+                subcategory_name:
+                  type: string
+                subcategory_desc:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/list-subcategory:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a list of Subcategory.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/get-subcategory/{categoryId}:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a Subcategory By Category Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          # description: The ID of the Category to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/update-subcategory/{subcategoryId}:
+    put:
+      tags:
+        - Subcategory
+      summary: Update Subcategory By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: subcategoryId
+          in: path
+          required: true
+          # description: The ID of the Subcategory to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                subcategory_image:
+                  type: string
+                subcategory_name:
+                  type: string
+                subcategory_desc:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/delete-subcategory/{subcategoryId}:
+    delete:
+      tags:
+        - Subcategory
+      summary: Delete Subcategory By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: subcategoryId
+          in: path
+          required: true
+          # description: The ID of the Subcategory to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/parent-of-subcategory/{subcategoryId}:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a category of subcategory.
+      description: Type Your Description Here.
+      parameters:
+        - name: subcategoryId
+          in: path
+          required: true
+          # description: The ID of the Category to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/count-active:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a total count of active subcategories.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/most-products:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a subcategories with the highest number of products.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/average-products:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a average number of products per subcategory.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/inactive:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a list of inactive subcategories.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /subcategory/count-products:
+    get:
+      tags:
+        - Subcategory
+      summary: Returns a count of products for each subcategory.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/create-products:
+    post:
+      tags:
+        - Product
+      summary: Create New Product.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                category_id:
+                  type: number
+                subcategory_id:
+                  type: number
+                variant_id:
+                  type: number
+                image:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/list-products:
+    get:
+      tags:
+        - Product
+      summary: Returns a list of Product.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/get-products/{productId}:
+    get:
+      tags:
+        - Product
+      summary: Returns a Product By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Product to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/update-products/{productId}:
+    put:
+      tags:
+        - Product
+      summary: Update Product By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the ProductId to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                subcategory_id:
+                  type: number
+                variant_id:
+                  type: number
+                image:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/delete-products/{productId}:
+    delete:
+      tags:
+        - Product
+      summary: Delete Product By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the ProductId to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/search/{productName}:
+    get:
+      tags:
+        - Product
+      summary: Returns a Product By Name.
+      description: Type Your Description Here.
+      parameters:
+        - name: productName
+          in: path
+          required: true
+          description: The Name of the Product to return.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/search-product:
+    get:
+      tags:
+        - Product
+      summary: Returns a Product With Filter.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/list/category/{categoryId}:
+    get:
+      tags:
+        - Product
+      summary: Returns a products by categoryId.
+      description: Type Your Description Here.
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          # description: The ID of the Category to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/list/subcategory/{subcategoryId}:
+    get:
+      tags:
+        - Product
+      summary: Returns a products by subcategoryId.
+      description: Type Your Description Here.
+      parameters:
+        - name: subcategoryId
+          in: path
+          required: true
+          # description: The ID of the Subcategory to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/variant-details/{productId}:
+    get:
+      tags:
+        - Product
+      summary: Returns a products by Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Subcategory to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/top-rated:
+    get:
+      tags:
+        - Product
+      summary: Returns a products with the highest ratings.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/new-arrivals:
+    get:
+      tags:
+        - Product
+      summary: Returns a recently added products.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/discounts:
+    get:
+      tags:
+        - Product
+      summary: Returns a products currently on sale.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/out-of-stock:
+    get:
+      tags:
+        - Product
+      summary: Returns a products with no available variants.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /product/count-categories:
+    get:
+      tags:
+        - Product
+      summary: Returns a count of products for each category.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/create-variant:
+    post:
+      tags:
+        - Variant
+      summary: Create New Variant.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                product_id:
+                  type: number
+                attributes:
+                  type: object
+                  properties:
+                    Color:
+                      type: string
+                    Size:
+                      type: string
+                    Price:
+                      type: number
+                    Quantity:
+                      type: number
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/list-variant:
+    get:
+      tags:
+        - Variant
+      summary: Returns a list of Variant.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/get-variant/{variantId}:
+    get:
+      tags:
+        - Variant
+      summary: Returns a Variant By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: variantId
+          in: path
+          required: true
+          # description: The ID of the Variant to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/update-variant/{variantId}:
+    put:
+      tags:
+        - Variant
+      summary: Update Variant By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: variantId
+          in: path
+          required: true
+          # description: The ID of the Variant to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: number
+                attributes:
+                  type: object
+                  properties:
+                    Color:
+                      type: string
+                    Size:
+                      type: string
+                    Price:
+                      type: number
+                    Quantity:
+                      type: number
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/delete-variant/{variantId}:
+    delete:
+      tags:
+        - Variant
+      summary: Delete Variant By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: variantId
+          in: path
+          required: true
+          # description: The ID of the Variant to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/product/{productId}:
+    get:
+      tags:
+        - Variant
+      summary: Returns a List all Variant details with product information.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Product to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/list-variant/{productId}:
+    get:
+      tags:
+        - Variant
+      summary: Returns All variant of particular product.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Product to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/count-stock/{productId}:
+    get:
+      tags:
+        - Variant
+      summary: Returns Count variant vise stock.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Product to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/low-quantity:
+    get:
+      tags:
+        - Variant
+      summary: Returns a products with low stock.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/high-price:
+    get:
+      tags:
+        - Variant
+      summary: Returns a products with the highest prices.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/multiple-variants:
+    get:
+      tags:
+        - Variant
+      summary: Returns a products with more than one variant.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/active:
+    get:
+      tags:
+        - Variant
+      summary: Returns a list of active variants.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /variant/count-products:
+    get:
+      tags:
+        - Variant
+      summary: Returns a count of variants for each product.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/create-review:
+    post:
+      tags:
+        - Review
+      summary: Create New Review.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                user_id:
+                  type: number
+                product_id:
+                  type: number
+                rating:
+                  type: number
+                comment:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/list-review:
+    get:
+      tags:
+        - Review
+      summary: Returns a list of Review.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/get-review/{reviewId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a Review By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          # description: The ID of the Review to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/update-review/{reviewId}:
+    put:
+      tags:
+        - Review
+      summary: Update Review By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          # description: The ID of the Review to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: number
+                product_id:
+                  type: number
+                rating:
+                  type: number
+                comment:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/delete-review/{reviewId}:
+    delete:
+      tags:
+        - Review
+      summary: Delete Review By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          # description: The ID of the Review to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/user-with-product/{userId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a User With Product By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/list-review-by-product/{productId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a Review List By Product Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Product to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request. Product ID must be an integer and larger than 0.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  # /review/no-reviews:
+  #   get:
+  #     tags:
+  #       - Review
+  #     summary: Returns a list of No Review.
+  #     description: Type Your Description Here.
+  #     responses:
+  #       "200":
+  #         description: OK
+  #       "400":
+  #         description: Bad request.
+  #       "401":
+  #         description: Authorization information is missing or invalid.
+  #       "404":
+  #         description: A user with the specified ID was not found.
+  #       "5XX":
+  #         description: Unexpected error.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 type: string
+  /review/top-rated-products:
+    get:
+      tags:
+        - Review
+      summary: Returns a list of Top Rated Products.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/review-with-user/{userId}:
+    get:
+      tags:
+        - Review
+      summary: Returns a Review With User By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the Review to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/with-comments:
+    get:
+      tags:
+        - Review
+      summary: Returns a list of Reviews With Comment.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /review/count-review-by-product:
+    get:
+      tags:
+        - Review
+      summary: Returns a Count Of Review By Product.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A user with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
