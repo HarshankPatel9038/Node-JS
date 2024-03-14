@@ -1,16 +1,61 @@
-// const mysql = require('mysql2');
+const poolPromise = require("../db");
 
-// const categoriesSchema = `
-//     CNUM INT AUTO_INCREMENT PRIMARY KEY,
-//     CNAME VARCHAR(255) NOT NULL,
-//     CITY VARCHAR(255) NOT NULL,
-//     RATING VARCHAR(255),
-//     SNUM BOOLEAN NOT NULL DEFAULT true,
-//     isActive BOOLEAN NOT NULL DEFAULT true,
-//     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-//     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-// `
+const insertCategory = async (data) => {
+  try {
+    let sqlQuery = `INSERT INTO salespeople (Sname, City, Comm) VALUES (?, ?, ?)`
+    let res = await poolPromise.execute(sqlQuery, [data.Sname, data.City, data.Comm]);
+    console.log(data);
+    console.log(res);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
-// const Categories = mongoose.model("Categories", categoriesSchema);
+const selectCategory = async () => {
+  try {
+    let sqlQuery = `SELECT * FROM salespeople`
+    let res = await poolPromise.execute(sqlQuery);
+    console.log(res);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
-// module.exports = Categories;
+const listCategory = async (id) => {
+  try {
+    let sqlQuery = `SELECT * FROM salespeople WHERE Snum=${id}`
+    let res = await poolPromise.execute(sqlQuery);
+    console.log(res);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+const updateCategory = async (data, id) => {
+  try {
+    let sqlQuery = `UPDATE salespeople SET Sname=?, City=?, Comm=? WHERE Snum=${id}`
+    let res = await poolPromise.execute(sqlQuery, [data.Sname, data.City, data.Comm]);
+    console.log('data', data);
+    console.log('res', res);
+  } catch (error) {
+    console.log('error', error.message);
+  }
+}
+
+const deleteCategory = async (id) => {
+  try {
+    let sqlQuery = `DELETE FROM salespeople WHERE Snum=${id}`
+    let res = await poolPromise.execute(sqlQuery);
+    console.log(res);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+module.exports = {
+  insertCategory,
+  selectCategory,
+  listCategory,
+  updateCategory,
+  deleteCategory
+}

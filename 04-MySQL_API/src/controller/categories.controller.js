@@ -1,32 +1,68 @@
-// const pool = require('./db');
+const { categoryModule } = require("../models");
+
+const createCategories = async (req, res) => {
+
+    try {
+        const category = await categoryModule.insertCategory(req.body);
+        console.log(category);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+const getCategories = async (req, res) => {
+
+    try {
+        const category = await categoryModule.selectCategory();
+        console.log(category);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
 
 const listCategories = async (req, res) => {
 
     try {
-        // const category = await pool.query("SELECT * FROM salespeople");
-
-        console.log('category');
-
-        // if (!category || category.length === 0) {
-        //     return res.status(404).json({
-        //         success: false,
-        //         message: 'No categories found'
-        //     });
-        // }
-
-        // return res.status(200).json({
-        //     success: true,
-        //     data: category,
-        //     message: 'Get Category List Successfully'
-        // });
+        const id = +req.params.Id;
+        const category = await categoryModule.listCategory(id);
+        console.log(category);
     } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message
-        });
+        console.log(error.message);
+    }
+};
+
+const updateCategory = async (req, res) => {
+
+    try {
+
+        const id = +req.params.Id;
+        const data = req.body;
+        console.log(data, id);
+
+        const category = await categoryModule.updateCategory(data, id);
+        console.log(category);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+const deleteCategory = async (req, res) => {
+
+    try {
+
+        const id = +req.params.Id
+        console.log(id)
+
+        const category = await categoryModule.deleteCategory(id);
+    } catch (error) {
+        console.log(error.message);
     }
 };
 
 module.exports = {
-    listCategories
+    createCategories,
+    getCategories,
+    listCategories,
+    updateCategory,
+    deleteCategory
 }

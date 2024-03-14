@@ -1,1 +1,1 @@
-module.exports.categoryValidation = require('./category.validation');
+// module.exports.categoryValidation = require('./category.validation');
