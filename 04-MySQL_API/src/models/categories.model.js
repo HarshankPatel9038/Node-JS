@@ -2,8 +2,8 @@ const poolPromise = require("../db");
 
 const insertCategory = async (data) => {
   try {
-    let sqlQuery = `INSERT INTO categories (category_name, category_desc, isActive) VALUES (?, ?, ?)`
-    let [rows] = await poolPromise.execute(sqlQuery, [data.category_name, data.category_desc, data.isActive]);
+    let sqlQuery = `INSERT INTO categories (category_name, category_desc) VALUES (?, ?)`
+    let [rows] = await poolPromise.execute(sqlQuery, [data.category_name, data.category_desc]);
     return rows;
   } catch (error) {
     throw error.message
