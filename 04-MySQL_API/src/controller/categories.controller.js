@@ -3,20 +3,40 @@ const { categoryModule } = require("../models");
 const createCategories = async (req, res) => {
 
     try {
-        const category = await categoryModule.insertCategory(req.body);
-        console.log(category);
+        const result = await categoryModule.insertCategory(req.body);
+
+        res.status(200).json({
+            success: true,
+            data: result,
+            message: 'Create Category successfully'
+        });
     } catch (error) {
-        console.log(error.message);
+        res.status(500).json({
+            success: false,
+            data: [],
+            message: 'Internal Server Error'
+        });
     }
 };
 
 const getCategories = async (req, res) => {
 
     try {
-        const category = await categoryModule.selectCategory();
-        console.log(category);
+        const result = await categoryModule.selectCategory();
+
+        console.log(result)
+
+        res.status(200).json({
+            success: true,
+            data: result,
+            message: 'Get Category successfully'
+        });
     } catch (error) {
-        console.log(error.message);
+        res.status(500).json({
+            success: false,
+            data: [],
+            message: 'Internal Server Error'
+        });
     }
 };
 
@@ -24,10 +44,19 @@ const listCategories = async (req, res) => {
 
     try {
         const id = +req.params.Id;
-        const category = await categoryModule.listCategory(id);
-        console.log(category);
+        const result = await categoryModule.listCategory(id);
+
+        res.status(200).json({
+            success: true,
+            data: result,
+            message: 'List Category By Id successfully'
+        });
     } catch (error) {
-        console.log(error.message);
+        res.status(500).json({
+            success: false,
+            data: [],
+            message: 'Internal Server Error'
+        });
     }
 };
 
@@ -39,10 +68,19 @@ const updateCategory = async (req, res) => {
         const data = req.body;
         console.log(data, id);
 
-        const category = await categoryModule.updateCategory(data, id);
-        console.log(category);
+        const result = await categoryModule.updateCategory(data, id);
+
+        res.status(200).json({
+            success: true,
+            data: result,
+            message: 'Update Category successfully'
+        });
     } catch (error) {
-        console.log(error.message);
+        res.status(500).json({
+            success: false,
+            data: [],
+            message: 'Internal Server Error'
+        });
     }
 };
 
@@ -53,9 +91,19 @@ const deleteCategory = async (req, res) => {
         const id = +req.params.Id
         console.log(id)
 
-        const category = await categoryModule.deleteCategory(id);
+        const result = await categoryModule.deleteCategory(id);
+
+        res.status(200).json({
+            success: true,
+            data: result,
+            message: 'Delete Category successfully'
+        });
     } catch (error) {
-        console.log(error.message);
+        res.status(500).json({
+            success: false,
+            data: [],
+            message: 'Internal Server Error'
+        });
     }
 };
 

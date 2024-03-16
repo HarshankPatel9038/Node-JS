@@ -3,23 +3,23 @@ const router = express.Router();
 const { categoryController } = require('../../controller');
 
 
-router.post('/create-data',
+router.post('/create-category',
     categoryController.createCategories
 );
 
-router.get('/get-data',
+router.get('/get-category',
     categoryController.getCategories
 );
 
-router.get('/list-data/:Id',
+router.get('/list-category/:Id',
     categoryController.listCategories
 );
 
-router.put('/update-data/:Id',
+router.put('/update-category/:Id',
     categoryController.updateCategory
 );
 
-router.delete('/delete-data/:Id',
+router.delete('/delete-category/:Id',
     categoryController.deleteCategory
 );
 
