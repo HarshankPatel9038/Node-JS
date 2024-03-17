@@ -1,5 +1,5 @@
-import Category from "./component/Category";
 import BackToTopButton from "./component/BackToTopButton";
+import Category from "./component/Category";
 
 function App() {
   return (

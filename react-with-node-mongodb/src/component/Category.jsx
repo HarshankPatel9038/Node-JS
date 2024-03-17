@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addCategories,
-  deleteCategories,
-  getCategories,
-  updateCategories,
-} from "../redux/slice/categoriesSlice";
+  addCategory,
+  deleteCategory,
+  getCategory,
+  updateCategory,
+} from "../redux/slice/categorySlice";
 import { IoClose } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
 import { AiTwotoneDelete } from "react-icons/ai";
 
 const Category = () => {
   const [addClass, setAddClass] = useState("close");
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [isActive, setIsActive] = useState("");
@@ -20,22 +21,23 @@ const Category = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getCategory());
   }, [dispatch]);
 
-  const { categories, isLoading, isError } = useSelector((state) => state);
+  const { category, isLoading, isError } = useSelector((state) => state);
+  console.log(category);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (isError) {
-    return <div>Error occurred while fetching categories.</div>;
+    return <div>Error occurred while fetching category.</div>;
   }
 
   let updateData = async (id) => {
     setEdit(id);
-    const categoryToEdit = categories?.data?.data?.find(
+    const categoryToEdit = category?.data?.data?.find(
       (value) => value._id === id
     );
     if (categoryToEdit) {
@@ -47,8 +49,8 @@ const Category = () => {
   };
 
   let deleteData = async (id) => {
-    await dispatch(deleteCategories(id));
-    dispatch(getCategories());
+    await dispatch(deleteCategory(id));
+    dispatch(getCategory());
   };
 
   const addData = async () => {
@@ -60,21 +62,22 @@ const Category = () => {
         isActive: isActive === "true" ? 1 : 0,
       };
       if (data.category_name) {
-        await dispatch(updateCategories({ id: edit, updateData: data }));
+        await dispatch(updateCategory({ id: edit, updateData: data }));
       }
     } else {
       const data = {
+        _id: id,
         category_name: name,
         category_desc: desc,
       };
       if (data.category_name) {
-        await dispatch(addCategories(data));
+        await dispatch(addCategory(data));
       }
     }
     setName("");
     setDesc("");
     setIsActive("");
-    dispatch(getCategories());
+    dispatch(getCategory());
     setEdit(null);
     setAddClass("close");
   };
@@ -97,8 +100,15 @@ const Category = () => {
           </div>
           <input
             type="text"
+            value={id}
+            placeholder="Id"
+            onChange={(e) => setId(e.target.value)}
+            style={{ display: edit ? "none" : "block" }}
+          />
+          <input
+            type="text"
             value={name}
-            placeholder="name"
+            placeholder="Name"
             onChange={(e) => setName(e.target.value)}
           />
           <textarea
@@ -124,16 +134,27 @@ const Category = () => {
           <th className="id">Id</th>
           <th className="name">Name</th>
           <th className="desc">Description</th>
+          <th className="img">Image</th>
           <th className="is_active">isActive</th>
           <th className="created">createdAt</th>
           <th className="updated">updatedAt</th>
           <th className="action">Action</th>
         </tr>
-        {categories?.data?.data?.map((value) => (
+        {category?.data?.data?.map((value, index) => (
           <tr key={value._id}>
-            <td>{value._id}</td>
+            <td>{value._id < 10 ? '0' + value._id : value._id}</td>
             <td>{value.category_name}</td>
             <td>{value.category_desc}</td>
+            <td>
+              <div className="img_wrapper">
+                <img
+                  src={`https://source.unsplash.com/random/100x100?sig=${
+                    index + 1
+                  }`}
+                  alt="category-image"
+                />
+              </div>
+            </td>
             <td>
               <div className="active_wrapper">
                 <span

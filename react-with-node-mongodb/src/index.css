@@ -169,18 +169,18 @@ button:hover {
 
 table tr th,
 table tr td {
-  padding: 5px 20px;
+  padding: 5px 12px;
   text-align: start;
   text-transform: capitalize;
 }
 
 table tr th:first-child,
 table tr td:first-child {
-  padding: 5px 20px 5px 0;
+  padding: 5px 12px 5px 0;
 }
 table tr th:last-child,
 table tr td:last-child {
-  padding: 5px 0 5px 20px;
+  padding: 5px 0 5px 12px;
 }
 table tr th.id {
   min-width: 35px;
@@ -189,7 +189,10 @@ table tr th.name {
   min-width: 185px;
 }
 table tr th.desc {
-  min-width: 500px;
+  min-width: 400px;
+}
+table tr th.img {
+  min-width: 100px;
 }
 table tr th.is_active {
   min-width: 110px;
@@ -200,6 +203,15 @@ table tr th.updated {
 }
 table tr th.action {
   min-width: 140px;
+}
+table tr td .img_wrapper img{
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 .active_wrapper {
