@@ -9,7 +9,7 @@ const createUser = {
     email: Joi.string().required().trim(),
     password: Joi.string().required().trim(),
     role: Joi.string().required().trim(),
-    refresh_token: Joi.string().required().trim(),
+    refresh_token: Joi.string().trim(),
     isActive: Joi.boolean()
   }
 }
@@ -22,7 +22,7 @@ const updateUser = {
     email: Joi.string().trim(),
     password: Joi.string().trim(),
     role: Joi.string().trim(),
-    refresh_token: Joi.string().trim(),
+    // refresh_token: Joi.string().trim(),
     isActive: Joi.boolean()
   },
   params: {

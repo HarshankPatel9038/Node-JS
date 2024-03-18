@@ -37,7 +37,6 @@ const usersSchema = new mongoose.Schema(
         },
         refresh_token: {
             type: String,
-            required: true,
             trim: true,
         },
         isActive: {
