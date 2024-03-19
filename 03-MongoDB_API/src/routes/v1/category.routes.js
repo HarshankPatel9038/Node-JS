@@ -3,6 +3,7 @@ const router = express.Router();
 const validate = require('../../middleware/validate');
 const { categoryValidation } = require('../../validation');
 const { categoryController } = require('../../controller');
+const auth = require('../../middleware/auth');
 
 
 // {
@@ -18,6 +19,7 @@ router.post('/create-category',
 );
 
 router.get('/list-category',
+    auth(),
     categoryController.listCategories
 );
 

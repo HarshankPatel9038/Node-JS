@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const createAccessRefreshToken = async (user_id) => {
   try {
     const user = await Users.findById(user_id);
-    const accessToken = await jwt.sign(
+    const access_token = await jwt.sign(
       {
         _id: user_id,
         name: user.name,
@@ -14,7 +14,7 @@ const createAccessRefreshToken = async (user_id) => {
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: process.env.ACCESS_TOKEN_EXPIRE }
     );
-    const refreshToken = await jwt.sign(
+    const refresh_token = await jwt.sign(
       {
         _id: user_id
       },
@@ -22,7 +22,11 @@ const createAccessRefreshToken = async (user_id) => {
       { expiresIn: process.env.REFRESH_TOKEN_EXPIRE }
     );
 
-    return { accessToken, refreshToken }
+    user.refresh_token = refresh_token;
+
+    user.save({ validateBeforeSave: false });
+
+    return { access_token, refresh_token }
   } catch (error) {
     console.log(error.message);
     throw error.message
@@ -98,16 +102,26 @@ const login = async (req, res) => {
       });
     }
 
-    const { accessToken, refreshToken } = await createAccessRefreshToken(userExist._id);
+    const { access_token, refresh_token } = await createAccessRefreshToken(userExist._id);
 
-    console.log(accessToken);
-    console.log(refreshToken);
+    const user = await Users.findById(userExist._id).select("-password -refresh_token");
 
-    // return res.status(200).json({
-    //   success: true,
-    //   data: userData,
-    //   message: 'User Register Successfully'
-    // });
+    const options = {
+      httpOnly: true,
+      secure: true,
+      // maxAge: 60 * 60 * 60 * 24 * 15-
+    };
+
+    res
+      .cookie("access_token", access_token, options)
+      .cookie("refresh_token", refresh_token, options)
+      .status(200)
+      .json({
+        success: true,
+        data: { access_token, refresh_token, userData: user },
+        message: 'User LogIn Successfully'
+      });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
