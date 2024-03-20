@@ -41,9 +41,9 @@ build/Release
 # Dependency directories
 01-Intro/node_modules/
 02-Express/node_modules/
-03-MongoDB_API/node_modules/
-04-MySQL_API/node_modules/
-Institute/node_modules/
+03-MongoDB_API/MongoDB/node_modules/
+04-MySQL_API/MySQL/node_modules/
+05-Institute/node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -75,9 +75,9 @@ web_modules/
 
 # dotenv environment variables file
 .env
-03-MongoDB_API/.env
-04-MySQL_API/.env
-Institute/.env
+03-MongoDB_API/MongoDB/.env
+04-MySQL_API/MySQL/.env
+05-Institute/.env
 .env.test
 .env.production
 

@@ -19,7 +19,7 @@ router.post('/create-category',
 );
 
 router.get('/list-category',
-    auth(),
+    auth(['Admin', 'User']),
     categoryController.listCategories
 );
 

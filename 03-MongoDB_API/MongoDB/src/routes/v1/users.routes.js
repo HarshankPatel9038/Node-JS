@@ -23,6 +23,14 @@ router.post('/login',
     userController.login
 );
 
+router.post('/generate-new-tokens',
+    userController.generateNewTokens
+);
+
+router.get('/logout',
+    userController.logout
+);
+
 router.get('/list-user',
     userController.listUser
 );

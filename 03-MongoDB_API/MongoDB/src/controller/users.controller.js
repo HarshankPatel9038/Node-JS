@@ -28,7 +28,6 @@ const createAccessRefreshToken = async (user_id) => {
 
     return { access_token, refresh_token }
   } catch (error) {
-    console.log(error.message);
     throw error.message
   }
 }
@@ -109,7 +108,7 @@ const login = async (req, res) => {
     const options = {
       httpOnly: true,
       secure: true,
-      // maxAge: 60 * 60 * 60 * 24 * 15-
+      maxAge: 15 * 24 * 60 * 60
     };
 
     res
@@ -129,6 +128,94 @@ const login = async (req, res) => {
     });
   }
 };
+
+const generateNewTokens = async (req, res) => {
+  try {
+
+    const getRefreshToken = req.cookies?.refresh_token || req.body.refresh_token;
+
+    if (!getRefreshToken) {
+      return res.status(401).json({
+        success: false,
+        message: 'Refresh Token Not Available'
+      });
+    }
+
+    const userExist = await Users.findOne({ _id: 50 });
+
+    if (!userExist) {
+      return res.status(401).json({
+        success: false,
+        message: 'User Not Found'
+      });
+    }
+
+    const { access_token, refresh_token } = await createAccessRefreshToken(userExist._id);
+
+    const user = await Users.updateOne({ _id: userExist._id }, { $set: { refresh_token: refresh_token } });
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+      maxAge: 15 * 24 * 60 * 60
+    };
+
+    res
+    .cookie("access_token", access_token, options)
+    .cookie("refresh_token", refresh_token, options)
+    .status(200)
+    .json({
+      success: true,
+      data: { access_token, refresh_token, userData: user },
+      message: 'User LogIn Successfully'
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const logout = async (req, res) => {
+  try {
+    const token = req.cookies?.refresh_token;
+
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: 'Token Not Available'
+      });
+    }
+
+    const userExist = await Users.findOne({ refresh_token: token });
+
+    if (!userExist) {
+      return res.status(404).json({
+        success: false,
+        message: 'User Not Found'
+      });
+    }
+
+    const user = await Users.updateOne({ _id: userExist._id }, { $unset: { refresh_token: 1 } });
+
+    res.clearCookie('access_token');
+    res.clearCookie('refresh_token');
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+      message: 'Logout Successful'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 
 const listUser = async (req, res) => {
   try {
@@ -192,6 +279,8 @@ const getUser = async (req, res) => {
 module.exports = {
   register,
   login,
+  generateNewTokens,
+  logout,
   listUser,
   getUser
 }
