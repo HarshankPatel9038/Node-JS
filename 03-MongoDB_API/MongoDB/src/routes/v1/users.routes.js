@@ -2,6 +2,7 @@ const express = require('express');
 const { userController } = require('../../controller');
 const validate = require('../../middleware/validate');
 const { userValidation } = require('../../validation');
+const passport = require('passport');
 
 const router = express.Router();
 
@@ -30,6 +31,16 @@ router.post('/generate-new-tokens',
 router.get('/logout',
     userController.logout
 );
+
+router.get('/google',
+    passport.authenticate('google', { scope: ['profile'] }));
+
+router.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+        console.log('Ok');
+        res.redirect('/');
+    });
 
 router.get('/list-user',
     userController.listUser

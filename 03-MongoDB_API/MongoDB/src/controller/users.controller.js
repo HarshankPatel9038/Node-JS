@@ -141,10 +141,10 @@ const generateNewTokens = async (req, res) => {
       });
     }
 
-    const userExist = await Users.findOne({ _id: 50 });
+    const userExist = await Users.findOne({ refresh_token: getRefreshToken });
 
     if (!userExist) {
-      return res.status(401).json({
+      return res.status(404).json({
         success: false,
         message: 'User Not Found'
       });
@@ -198,14 +198,14 @@ const logout = async (req, res) => {
       });
     }
 
-    const user = await Users.updateOne({ _id: userExist._id }, { $unset: { refresh_token: 1 } });
+    await Users.updateOne({ _id: userExist._id }, { $unset: { refresh_token: 1 } });
 
     res.clearCookie('access_token');
     res.clearCookie('refresh_token');
 
     return res.status(200).json({
       success: true,
-      data: user,
+      data: {},
       message: 'Logout Successful'
     });
   } catch (error) {
