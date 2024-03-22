@@ -152,7 +152,6 @@ const searchByName = async (req, res) => {
 
   try {
     const productName = req.params.productName;
-    console.log(productName)
 
     if (!productName) {
       return res.status(400).json({

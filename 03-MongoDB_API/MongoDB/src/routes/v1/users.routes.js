@@ -36,11 +36,13 @@ router.get('/google',
     passport.authenticate('google', { scope: ['profile'] }));
 
 router.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { failureRedirect: '/' }),
     function (req, res) {
-        console.log('Ok');
-        res.redirect('/');
-    });
+        console.log(req.session);
+        console.log(req.isAuthenticated());
+        res.redirect('http://localhost:3000/api/v1/category/list-category');
+    }
+);
 
 router.get('/list-user',
     userController.listUser

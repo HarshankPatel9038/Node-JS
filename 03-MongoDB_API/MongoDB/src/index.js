@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const passport = require('passport');
 
 const swaggerUi = require('swagger-ui-express');
@@ -9,23 +10,26 @@ const YAML = require('yamljs');
 const routes = require('./routes/v1');
 const connectDB = require('./db');
 const connectPassport = require('./services/Provider');
-
 connectDB();
 
 const app = express();
+
+app.use(session({
+    secret: process.env.GOOGLE_SECRET,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+connectPassport();
 
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 app.use('/api/v1', routes);
-
-
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: process.env.GOOGLE_SECRET, resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 
-connectPassport();
 
 // swagger & yaml
 const swaggerDocument = YAML.load('./src/apidocs.yaml');

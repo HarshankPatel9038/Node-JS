@@ -25,7 +25,6 @@ const Category = () => {
   }, [dispatch]);
 
   const { category, isLoading, isError } = useSelector((state) => state);
-  console.log(category);
 
   if (isLoading) {
     return <div>Loading...</div>;

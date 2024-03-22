@@ -53,7 +53,6 @@ const getVariants = async (req, res) => {
   try {
     const variantId = req.params.variantId;
     const convertIdInNumber = +variantId;
-    console.log(convertIdInNumber)
     if (!variantId) {
       return res.status(400).json({
         success: false,

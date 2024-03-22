@@ -43,7 +43,6 @@ build/Release
 02-Express/node_modules/
 03-MongoDB_API/MongoDB/node_modules/
 04-MySQL_API/MySQL/node_modules/
-05-Institute/node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -77,7 +76,6 @@ web_modules/
 .env
 03-MongoDB_API/MongoDB/.env
 04-MySQL_API/MySQL/.env
-05-Institute/.env
 .env.test
 .env.production
 
