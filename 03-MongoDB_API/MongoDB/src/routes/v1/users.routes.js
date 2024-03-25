@@ -36,13 +36,24 @@ router.get('/google',
     passport.authenticate('google', { scope: ['profile'] }));
 
 router.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
+    passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
         console.log(req.session);
         console.log(req.isAuthenticated());
         res.redirect('http://localhost:3000/api/v1/category/list-category');
     }
 );
+
+router.get('/facebook', passport.authenticate('facebook'));
+
+router.get('/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: 'http://localhost:3000/api/v1/category/list-category' , failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('http://localhost:3000/api/v1/category/list-category');
+//   }
+  );
+
 
 router.get('/list-user',
     userController.listUser

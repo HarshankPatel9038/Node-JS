@@ -15,7 +15,12 @@ connectDB();
 const app = express();
 
 app.use(session({
-    secret: process.env.GOOGLE_SECRET,
+    secret: process.env.GOOGLE_SECRET_KEY,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(session({
+    secret: process.env.FACEBOOK_SECRET_KEY,
     resave: true,
     saveUninitialized: true
 }));
