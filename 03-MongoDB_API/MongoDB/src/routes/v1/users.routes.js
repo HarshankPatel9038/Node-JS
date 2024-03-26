@@ -3,6 +3,7 @@ const { userController } = require('../../controller');
 const validate = require('../../middleware/validate');
 const { userValidation } = require('../../validation');
 const passport = require('passport');
+const upload = require('../../services/upload');
 
 const router = express.Router();
 
@@ -13,9 +14,11 @@ const router = express.Router();
 //     "mobile_no": "1234567890",
 //     "email": "test@gmail.com",
 //     "password": "test@123",
-//     "role": "User"
+//     "role": "user"
 // }
 router.post('/register',
+    upload.single('avatar'),
+    // upload.array('photos', 12),
     validate(userValidation.createUser),
     userController.register
 );
@@ -47,12 +50,12 @@ router.get('/google/callback',
 router.get('/facebook', passport.authenticate('facebook'));
 
 router.get('/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: 'http://localhost:3000/api/v1/category/list-category' , failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('http://localhost:3000/api/v1/category/list-category');
-//   }
-  );
+    passport.authenticate('facebook', { successRedirect: 'http://localhost:3000/api/v1/category/list-category', failureRedirect: '/login' }),
+    //   function(req, res) {
+    //     // Successful authentication, redirect home.
+    //     res.redirect('http://localhost:3000/api/v1/category/list-category');
+    //   }
+);
 
 
 router.get('/list-user',

@@ -1,6 +1,7 @@
 const Users = require("../models/users.model");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { uploadFile } = require("../services/cloudinary");
 
 const createAccessRefreshToken = async (user_id) => {
   try {
@@ -34,6 +35,7 @@ const createAccessRefreshToken = async (user_id) => {
 
 const register = async (req, res) => {
   try {
+
     const { email, mobile_no, password } = req.body;
 
     const userExist = await Users.findOne({
@@ -48,9 +50,20 @@ const register = async (req, res) => {
       });
     }
 
+    console.log('req.file', req.file);
+
+    const result = await uploadFile(req.file.path);
+
+    console.log('result', result);
+
+    const avatar = {
+      public_id: result.public_id,
+      url: result.url
+    }
+
     const hashPass = await bcrypt.hash(password, 10);
 
-    const user = await Users.create({ ...req.body, password: hashPass });
+    const user = await Users.create({ ...req.body, password: hashPass, avatar });
 
     const userData = await Users.findById(user._id).select("-password -refresh_token");
 
@@ -161,14 +174,14 @@ const generateNewTokens = async (req, res) => {
     };
 
     res
-    .cookie("access_token", access_token, options)
-    .cookie("refresh_token", refresh_token, options)
-    .status(200)
-    .json({
-      success: true,
-      data: { access_token, refresh_token, userData: user },
-      message: 'User LogIn Successfully'
-    });
+      .cookie("access_token", access_token, options)
+      .cookie("refresh_token", refresh_token, options)
+      .status(200)
+      .json({
+        success: true,
+        data: { access_token, refresh_token, userData: user },
+        message: 'User LogIn Successfully'
+      });
 
   } catch (error) {
     return res.status(500).json({

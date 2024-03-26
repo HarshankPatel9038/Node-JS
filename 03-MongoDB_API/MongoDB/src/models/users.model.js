@@ -44,6 +44,15 @@ const usersSchema = new mongoose.Schema(
         googleId: {
             type: String,
         },
+        facebookId: {
+            type: String,
+        },
+        avatar: {
+            type: {
+                public_id: String,
+                url: String
+            }
+        },
         isActive: {
             type: Boolean,
             required: true,
