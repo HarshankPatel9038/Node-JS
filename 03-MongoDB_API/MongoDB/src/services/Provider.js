@@ -37,7 +37,7 @@ const connectPassport = async () => {
     }, async function (accessToken, refreshToken, profile, cb) {
       console.log(profile);
 
-      const user = await Users.findOne({ id: profile.id });
+      const user = await Users.findOne({ facebookId: profile.id });
       console.log('facebook', user);
 
       if (!user) {

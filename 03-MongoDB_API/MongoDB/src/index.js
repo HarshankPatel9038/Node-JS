@@ -12,6 +12,8 @@ const connectDB = require('./db');
 const connectPassport = require('./services/Provider');
 connectDB();
 
+require('dotenv').config()
+
 const app = express();
 
 app.use(session({

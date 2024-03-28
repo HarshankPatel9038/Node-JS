@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const createUser = {
   body: {
-    _id: Joi.number().required(),
+    // _id: Joi.number().required(),
     name: Joi.string().required().trim(),
     address: Joi.string().required().trim(),
     mobile_no: Joi.string().required().trim(),

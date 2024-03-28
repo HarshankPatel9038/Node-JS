@@ -2,6 +2,8 @@ const Users = require("../models/users.model");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { uploadFile } = require("../services/cloudinary");
+const mailSender = require("../services/mailSender");
+const createPdf = require("../services/createPdf");
 
 const createAccessRefreshToken = async (user_id) => {
   try {
@@ -35,6 +37,7 @@ const createAccessRefreshToken = async (user_id) => {
 
 const register = async (req, res) => {
   try {
+    const result = await uploadFile(req.file.path);
 
     const { email, mobile_no, password } = req.body;
 
@@ -50,18 +53,13 @@ const register = async (req, res) => {
       });
     }
 
-    console.log('req.file', req.file);
+    const hashPass = await bcrypt.hash(password, 10);
 
-    const result = await uploadFile(req.file.path);
-
-    console.log('result', result);
 
     const avatar = {
       public_id: result.public_id,
       url: result.url
-    }
-
-    const hashPass = await bcrypt.hash(password, 10);
+    };;
 
     const user = await Users.create({ ...req.body, password: hashPass, avatar });
 
@@ -75,6 +73,8 @@ const register = async (req, res) => {
       });
     }
 
+    createPdf(req.body);
+    mailSender(email);
     return res.status(200).json({
       success: true,
       data: userData,
@@ -83,7 +83,7 @@ const register = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: 'Internal Server Error'
+      message: 'Internal Server Error' + error.message
     });
   }
 };
