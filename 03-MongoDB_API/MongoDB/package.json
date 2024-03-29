@@ -29,6 +29,7 @@
     "path": "^0.12.7",
     "pdfmake": "^0.2.10",
     "swagger-ui-express": "^5.0.0",
+    "twilio": "^5.0.1",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {

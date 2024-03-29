@@ -4,6 +4,7 @@ const validate = require('../../middleware/validate');
 const { userValidation } = require('../../validation');
 const passport = require('passport');
 const upload = require('../../services/upload');
+const otpSender = require('../../services/otpSender');
 
 const router = express.Router();
 
@@ -25,6 +26,24 @@ router.post('/register',
 
 router.post('/login',
     userController.login
+);
+
+router.post('/sendOTP',
+(req, res) => {
+    otpSender.sendOTP(),
+        res.status(200).json({
+            message: 'OTP Send In Your Mobile Number'
+        })
+    }
+);
+
+router.post('/verifyOTP',
+(req, res) => {
+    otpSender.verifyOTP(),
+        res.status(200).json({
+            message: 'OTP Verification Successfully'
+        })
+    }
 );
 
 router.post('/generate-new-tokens',

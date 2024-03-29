@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -11,8 +12,6 @@ const routes = require('./routes/v1');
 const connectDB = require('./db');
 const connectPassport = require('./services/Provider');
 connectDB();
-
-require('dotenv').config()
 
 const app = express();
 
