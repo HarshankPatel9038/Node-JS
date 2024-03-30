@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const createUser = {
+const registerUser = {
   body: {
     // _id: Joi.number().required(),
     name: Joi.string().required().trim(),
@@ -21,8 +21,6 @@ const updateUser = {
     mobile_no: Joi.string().trim(),
     email: Joi.string().trim(),
     password: Joi.string().trim(),
-    role: Joi.string().trim(),
-    // refresh_token: Joi.string().trim(),
     isActive: Joi.boolean()
   },
   params: {
@@ -38,7 +36,7 @@ const deleteUser = {
 
 
 module.exports = {
-  createUser,
+  registerUser,
   updateUser,
   deleteUser
 }

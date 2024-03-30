@@ -123,7 +123,7 @@ const deleteProduct = async (req, res) => {
     if (!productId) {
       return res.status(400).json({
         success: false,
-        message: 'Product ID Is Not required'
+        message: 'Product Not Found'
       })
     }
 

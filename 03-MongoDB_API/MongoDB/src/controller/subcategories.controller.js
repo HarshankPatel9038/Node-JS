@@ -151,7 +151,7 @@ const deleteSubcategory = async (req, res) => {
     if (!subCategoryId) {
       return res.status(400).json({
         success: false,
-        message: 'Subcategory ID Is Not required'
+        message: 'Subcategory Not Found'
       })
     }
 

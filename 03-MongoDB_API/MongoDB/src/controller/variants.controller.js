@@ -122,7 +122,7 @@ const deleteVariant = async (req, res) => {
     if (!variantId) {
       return res.status(400).json({
         success: false,
-        message: 'Variant ID Is Not required'
+        message: 'Variant Not Found'
       })
     }
 

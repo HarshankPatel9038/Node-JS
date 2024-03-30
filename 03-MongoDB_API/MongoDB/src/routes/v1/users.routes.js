@@ -20,7 +20,7 @@ const router = express.Router();
 router.post('/register',
     upload.single('avatar'),
     // upload.array('photos', 12),
-    validate(userValidation.createUser),
+    validate(userValidation.registerUser),
     userController.register
 );
 
@@ -85,6 +85,28 @@ router.get('/list-user',
 
 router.get('/get-user/:userId',
     userController.getUser
+);
+
+router.put('/update-user/:userId',
+    validate(userValidation.updateUser),
+    userController.updateUser
+);
+
+router.delete('/delete-user/:userId',
+    validate(userValidation.updateUser),
+    userController.deleteUser
+);
+
+router.get('/order/:userId',
+    userController.order
+);
+
+router.get('/review/:userId',
+    userController.review
+);
+
+router.get('/deactivate',
+    userController.deactivate
 );
 
 module.exports = router;

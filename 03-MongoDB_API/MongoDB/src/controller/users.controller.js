@@ -289,11 +289,213 @@ const getUser = async (req, res) => {
 };
 
 
+
+const updateUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const userUpdates = req.body;
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'User ID is required'
+      });
+    }
+
+    const updatedUser = await Users.findByIdAndUpdate(userId, userUpdates, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: updatedUser,
+      message: 'Update User Successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const user = await Users.findByIdAndDelete(req.params.userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+      message: 'User deleted successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const order = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const convertIdInNumber = +userId;
+    const user = await Users.aggregate([
+      {
+        $lookup: {
+          from: "orders",
+          localField: "_id",
+          foreignField: "user_id",
+          as: "orders"
+        }
+      },
+      {
+        $match: {
+          _id: convertIdInNumber
+        }
+      },
+      {
+        $unwind: {
+          path: "$orders"
+        }
+      },
+      {
+        $project: {
+          order_id: "$orders._id",
+          product_id: "$orders.products.product_id",
+          total_amount: "$orders.total_amount",
+          order_status: "$orders.status",
+          discount: "$orders.discount"
+        }
+      }
+    ]);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+      message: 'User Orders'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const review = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const convertIdInNumber = +userId;
+    const user = await Users.aggregate([
+      {
+        $lookup: {
+          from: "reviews",
+          localField: "_id",
+          foreignField: "user_id",
+          as: "reviews"
+        }
+      },
+      {
+        $match: {
+          _id: convertIdInNumber
+        }
+      },
+      {
+        $unwind: {
+          path: "$reviews"
+        }
+      },
+      {
+        $project: {
+          order_id: "$reviews._id",
+          product_id: "$reviews.product_id",
+          rating: "$reviews.rating",
+          comment: "$reviews.comment"
+        }
+      }
+    ]);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+      message: 'User Review'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+const deactivate = async (req, res) => {
+  try {
+    const user = await Users.aggregate([
+      {
+        $match: {
+          isActive: false
+        }
+      }
+    ]);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+      message: 'Deactivate Users'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+
 module.exports = {
   register,
   login,
   generateNewTokens,
   logout,
   listUser,
-  getUser
+  getUser,
+  updateUser,
+  deleteUser,
+  order,
+  review,
+  deactivate
 }

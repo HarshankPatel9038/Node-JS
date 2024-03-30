@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const itemsSchema = new mongoose.Schema(
     {
-        pid: {
-            type: mongoose.Types.ObjectId,
+        product_id: {
+            // type: mongoose.Types.ObjectId,
+            type: Number,
             ref: 'Products',
             required: true
         },
@@ -16,16 +17,41 @@ const itemsSchema = new mongoose.Schema(
 
 const ordersSchema = new mongoose.Schema(
     {
-        items: [itemsSchema],
+        _id: {
+            type: Number
+        },
+        user_id: {
+            // type: mongoose.Types.ObjectId,
+            type: Number,
+            ref: 'Users',
+            required: true
+        },
+        // seller_id: {
+        //     // type: mongoose.Types.ObjectId,
+        //     type: Number,
+        //     ref: 'Categories',
+        //     required: true
+        // },
+        payment_id: {
+            // type: mongoose.Types.ObjectId,
+            type: Number,
+            ref: 'Payments',
+            required: true
+        },
+        products: [itemsSchema],
         shipping_address: {
             type: String,
+            required: true,
+        },
+        total_amount: {
+            type: Number,
             required: true,
         },
         status: {
             type: String,
             required: true,
         },
-        total_amount: {
+        discount: {
             type: Number,
             required: true,
         }
