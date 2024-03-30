@@ -15,6 +15,16 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+}))
+
 app.use(session({
     secret: process.env.GOOGLE_SECRET_KEY,
     resave: true,
@@ -29,10 +39,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 connectPassport();
-
-app.use(express.json());
-app.use(cors());
-app.use(cookieParser());
 app.use('/api/v1', routes);
 app.use(require('body-parser').urlencoded({ extended: true }));
 

@@ -4,7 +4,7 @@ const validate = require('../../middleware/validate');
 const { userValidation } = require('../../validation');
 const passport = require('passport');
 const upload = require('../../services/upload');
-const otpSender = require('../../services/otpSender');
+const { sendOTP, verifyOTP } = require('../../services/otpSender');
 
 const router = express.Router();
 
@@ -28,18 +28,20 @@ router.post('/login',
     userController.login
 );
 
-router.post('/sendOTP',
-(req, res) => {
-    otpSender.sendOTP(),
+router.post(
+    '/sendOTP',
+    sendOTP,
+    (req, res, next) => {
         res.status(200).json({
             message: 'OTP Send In Your Mobile Number'
         })
     }
 );
 
-router.post('/verifyOTP',
-(req, res) => {
-    otpSender.verifyOTP(),
+router.post(
+    '/verifyOTP',
+    verifyOTP,
+    (req, res, next) => {
         res.status(200).json({
             message: 'OTP Verification Successfully'
         })

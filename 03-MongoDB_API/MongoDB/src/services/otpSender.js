@@ -11,18 +11,19 @@ const sendOTP = (req, res, next) => {
       from: process.env.TWILIO_VERIFY_MOBILE_NUMBER, // From a valid Twilio number
     })
     .then((message) => {
-      console.log(message.sid);
-      // req.session.otpCode = otpCode;
-      // req.session.otpCodeExpiration = Date.now() + 60000;
+      req.session.otpCode = otpCode;
+      console.log(req.session);
+      next();
     });
 };
 
 const verifyOTP = (req, res, next) => {
+  console.log(req.session);
   let enteredOTP = req.body.otp;
-  // let storedOTP = req.session.otpCode;
-  let storedOTP = otpCode;
+  let storedOTP = req.session.otpCode;
+  console.log(enteredOTP, storedOTP);
 
-  if (enteredOTP && storedOTP && enteredOTP.toString() === storedOTP.toString()) {
+  if (enteredOTP && storedOTP && enteredOTP == storedOTP) {
     next();
   } else {
     res.status(400).json({ success: false, message: "Invalid OTP" });
