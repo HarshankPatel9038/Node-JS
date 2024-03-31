@@ -2,11 +2,11 @@ const pick = require("../util/pick");
 const Joi = require("joi");
 
 const validate = (schema) => (req, res, next) => {
-    console.log(schema);
-    console.log(Object.keys(schema));
+    // console.log(schema);
+    // console.log(Object.keys(schema));
 
     const object = pick(req, Object.keys(schema));
-    console.log(object);
+    // console.log(object);
 
     const { error, value } = Joi.compile(schema)
         .prefs({

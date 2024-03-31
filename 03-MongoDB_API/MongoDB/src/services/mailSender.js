@@ -13,7 +13,7 @@ const mailSender = async (req, res, email) => {
   const mailOptions = {
     from: {
       name: 'eCommerce MongoDB',
-      address: process.env.MAILSENDER_USER
+      address: email
     },
     to: req,
     subject: "User Registration",

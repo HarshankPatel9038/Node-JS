@@ -12,16 +12,13 @@ const sendOTP = (req, res, next) => {
     })
     .then((message) => {
       req.session.otpCode = otpCode;
-      console.log(req.session);
       next();
     });
 };
 
 const verifyOTP = (req, res, next) => {
-  console.log(req.session);
   let enteredOTP = req.body.otp;
   let storedOTP = req.session.otpCode;
-  console.log(enteredOTP, storedOTP);
 
   if (enteredOTP && storedOTP && enteredOTP == storedOTP) {
     next();

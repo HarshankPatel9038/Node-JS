@@ -151,7 +151,6 @@ const product = async (req, res) => {
   try {
     const productId = req.params.productId;
     const convertIdInNumber = +productId;
-    console.log(convertIdInNumber)
     if (!productId) {
       return res.status(400).json({
         success: false,
@@ -208,7 +207,6 @@ const listVariantByProductId = async (req, res) => {
   try {
     const productId = req.params.productId;
     const convertIdInNumber = +productId;
-    console.log(convertIdInNumber)
     if (!productId) {
       return res.status(400).json({
         success: false,

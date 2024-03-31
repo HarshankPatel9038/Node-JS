@@ -35,6 +35,7 @@ const usersSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true,
+            default: "user",
         },
         refresh_token: {
             type: String,

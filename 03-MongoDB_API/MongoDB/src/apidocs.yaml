@@ -13,7 +13,7 @@ info:
   #     url:
 servers:
   - url: http://localhost:3000/api/v1
-    description: Local server description, e.g. Local server
+    description: Local server in port 3000, e.g. Local server
   # - url: http://api.example.com/v1
   #   description: Optional server description, e.g. Main (production) server
   # - url: http://staging-api.example.com
@@ -48,7 +48,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -71,7 +71,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -103,7 +103,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -150,7 +150,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -182,7 +182,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -205,7 +205,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -228,7 +228,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -251,7 +251,7 @@ paths:
         '401':
           description: Authorization information is missing or invalid.
         '404':
-          description: A user with the specified ID was not found.
+          description: not found.
         '5XX':
           description: Unexpected error.
           content:
@@ -274,7 +274,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -297,7 +297,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -337,7 +337,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -360,7 +360,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -392,7 +392,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -441,7 +441,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -473,7 +473,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -505,7 +505,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -528,7 +528,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -551,7 +551,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -574,7 +574,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -597,7 +597,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -620,7 +620,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -664,7 +664,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -687,7 +687,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -719,7 +719,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -772,7 +772,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -804,7 +804,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -834,7 +834,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -857,7 +857,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -889,7 +889,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -921,7 +921,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -953,7 +953,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -976,7 +976,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -999,7 +999,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1022,7 +1022,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1045,7 +1045,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1068,7 +1068,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1113,7 +1113,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1136,7 +1136,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1168,7 +1168,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1222,7 +1222,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1254,7 +1254,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1286,7 +1286,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1318,7 +1318,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1350,7 +1350,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1373,7 +1373,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1396,7 +1396,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1419,7 +1419,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1442,7 +1442,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1465,7 +1465,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1505,7 +1505,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1528,7 +1528,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1560,7 +1560,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1609,7 +1609,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1641,7 +1641,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1673,7 +1673,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1705,7 +1705,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1728,7 +1728,7 @@ paths:
   #       "401":
   #         description: Authorization information is missing or invalid.
   #       "404":
-  #         description: A user with the specified ID was not found.
+  #         description: not found.
   #       "5XX":
   #         description: Unexpected error.
   #         content:
@@ -1751,7 +1751,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1783,7 +1783,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1806,7 +1806,7 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -1829,7 +1829,1014 @@ paths:
         "401":
           description: Authorization information is missing or invalid.
         "404":
-          description: A user with the specified ID was not found.
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/register:
+    post:
+      tags:
+        - User
+      summary: User Register.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                # _id:
+                #   type: number
+                name:
+                  type: string
+                avatar:
+                  type: string
+                  format: uri
+                address:
+                  type: string
+                mobile_no:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/login:
+    post:
+      tags:
+        - User
+      summary: LogIn User.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mobile_no:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+  /user/sendOTP:
+    post:
+      tags:
+        - User
+      summary: send OTP To User.
+      description: Type Your Description Here.
+      # requestBody:
+      #   required: true
+      #   content:
+      #     application/json:
+      #       schema:
+      #         type: object
+      #         properties:
+      #           mobile_no:
+      #             type: string
+      #           email:
+      #             type: string
+      #           password:
+      #             type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/verifyOTP:
+    post:
+      tags:
+        - User
+      summary: verify User OTP.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: number
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/generate-new-tokens:
+    post:
+      tags:
+        - User
+      summary: Generate New Tokens For User.
+      description: Type Your Description Here.
+      # requestBody:
+      #   required: true
+      #   content:
+      #     application/json:
+      #       schema:
+      #         type: object
+      #         properties:
+      #           otp:
+      #             type: number
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/logout:
+    get:
+      tags:
+        - User
+      summary: User Logout.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/list-user:
+    get:
+      tags:
+        - User
+      summary: Users List.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/get-user/{userId}:
+    get:
+      tags:
+        - User
+      summary: Returns a User By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/update-user/{userId}:
+    put:
+      tags:
+        - User
+      summary: Update User By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+                mobile_no:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/delete-user/{userId}:
+    delete:
+      tags:
+        - User
+      summary: Delete User By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/order/{userId}:
+    get:
+      tags:
+        - User
+      summary: Returns a Order By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/review/{userId}:
+    get:
+      tags:
+        - User
+      summary: Returns a Review By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /user/deactivate:
+    get:
+      tags:
+        - User
+      summary: Returns a List Of Deactivate User.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/place-order:
+    post:
+      tags:
+        - Order
+      summary: Create New Order.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                user_id:
+                  type: number
+                payment_id:
+                  type: number
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: number
+                      quantity:
+                        type: number
+                shipping_address:
+                  type: string
+                total_amount:
+                  type: number
+                status:
+                  type: string
+                discount:
+                  type: number
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/list-order:
+    get:
+      tags:
+        - Order
+      summary: Returns a list of Order.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/get-order/{orderId}:
+    get:
+      tags:
+        - Order
+      summary: Returns a Order By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          # description: The ID of the Order to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/update-order/{orderId}:
+    put:
+      tags:
+        - Order
+      summary: Update Order By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          # description: The ID of the Order to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: number
+                payment_id:
+                  type: number
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: number
+                      quantity:
+                        type: number
+                shipping_address:
+                  type: string
+                total_amount:
+                  type: number
+                status:
+                  type: string
+                discount:
+                  type: number
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/delete-order/{orderId}:
+    delete:
+      tags:
+        - Order
+      summary: Delete Order By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          # description: The ID of the Order to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/user/{userId}:
+    get:
+      tags:
+        - Order
+      summary: Returns a User With Order By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/product/{productId}:
+    get:
+      tags:
+        - Order
+      summary: Returns a Product With Order By Product Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          # description: The ID of the Product to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: A product with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /payment/create-payment:
+    post:
+      tags:
+        - Payment
+      summary: Create New Payment.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                order_id:
+                  type: number
+                gateway:
+                  type: string
+                status:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /payment/list-payment:
+    get:
+      tags:
+        - Payment
+      summary: Returns a list of Payment.
+      description: Type Your Description Here.
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /payment/get-payment/{paymentId}:
+    get:
+      tags:
+        - Payment
+      summary: Returns a Payment By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          # description: The ID of the Payment to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /payment/update-payment/{paymentId}:
+    put:
+      tags:
+        - Payment
+      summary: Update Payment By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          # description: The ID of the Payment to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: number
+                gateway:
+                  type: string
+                status:
+                  type: string
+                isActive:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /payment/delete-payment/{paymentId}:
+    delete:
+      tags:
+        - Payment
+      summary: Delete Payment By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          # description: The ID of the Payment to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /payment/order/{orderId}:
+    get:
+      tags:
+        - Payment
+      summary: Returns a Order With Payment By Order Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          # description: The ID of the Order to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /cart/add-to-cart:
+    post:
+      tags:
+        - Cart
+      summary: Create New Cart.
+      description: Type Your Description Here.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: number
+                user_id:
+                  type: number
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: number
+                      quantity:
+                        type: number
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /cart/user/{userId}:
+    get:
+      tags:
+        - Cart
+      summary: Returns a User With Cart By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /cart/update-cart/{cartId}:
+    put:
+      tags:
+        - Cart
+      summary: Update Cart By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          # description: The ID of the Cart to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: number
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: number
+                      quantity:
+                        type: number
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:

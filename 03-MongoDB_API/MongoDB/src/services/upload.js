@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     cb(null, './public/temp')
   },
   filename: function (req, file, cb) {
-    console.log(file);
+    // console.log(file);
     const ext = path.extname(file.originalname);
     if (ext !== '.png') {
       cb('Only png File Upload')

@@ -12,9 +12,9 @@ const createPayment = {
 
 const updatePayment = {
   body: {
-    order_id: Joi.number().required(),
-    gateway: Joi.string().required(),
-    status: Joi.string().required(),
+    order_id: Joi.number(),
+    gateway: Joi.string().trim(),
+    status: Joi.string().trim(),
     isActive: Joi.boolean()
   },
   params: {

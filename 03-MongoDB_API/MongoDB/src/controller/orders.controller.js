@@ -1,4 +1,8 @@
+const path = require("path");
 const Orders = require("../models/orders.model");
+const createPdf = require("../services/createPdf");
+const mailSender = require("../services/mailSender");
+const fs = require('fs');
 
 const placeOrder = async (req, res) => {
   try {
@@ -10,6 +14,31 @@ const placeOrder = async (req, res) => {
         message: 'Internal Server Error'
       });
     }
+
+    const user = await Orders.aggregate([
+      {
+        $lookup: {
+          from: "users",
+          localField: "user_id",
+          foreignField: "_id",
+          as: "users"
+        }
+      },
+      {
+        $unwind: {
+          path: "$users"
+        }
+      },
+      {
+        $match: {
+          "users._id": req.body.user_id
+        }
+      }
+    ]);
+
+    createPdf(user[0]);
+    mailSender(user[0].users.email);
+    fs.unlinkSync(path.join(__dirname, '../services/document/invoice.pdf'));
 
     return res.status(200).json({
       success: true,

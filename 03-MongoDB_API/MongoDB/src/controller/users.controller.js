@@ -37,7 +37,7 @@ const createAccessRefreshToken = async (user_id) => {
 
 const register = async (req, res) => {
   try {
-    const result = await uploadFile(req.file.path);
+    const path = await uploadFile(req.file.path);
 
     const { email, mobile_no, password } = req.body;
 
@@ -57,8 +57,8 @@ const register = async (req, res) => {
 
 
     const avatar = {
-      public_id: result.public_id,
-      url: result.url
+      public_id: path.public_id,
+      url: path.url
     };;
 
     const user = await Users.create({ ...req.body, password: hashPass, avatar });
@@ -73,8 +73,9 @@ const register = async (req, res) => {
       });
     }
 
-    createPdf(req.body);
-    mailSender(email);
+    // createPdf(req.body);
+    // mailSender(email);
+
     return res.status(200).json({
       success: true,
       data: userData,

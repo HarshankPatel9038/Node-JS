@@ -11,7 +11,7 @@ const connectPassport = async () => {
       callbackURL: "http://localhost:3000/api/v1/user/google/callback"
     },
       async function (accessToken, refreshToken, profile, cb) {
-        console.log(profile);
+        // console.log(profile);
 
         const user = await Users.findOne({ googleId: profile.id });
 
@@ -35,10 +35,10 @@ const connectPassport = async () => {
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       callbackURL: "http://localhost:3000/api/v1/user/facebook/callback"
     }, async function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
+      // console.log(profile);
 
       const user = await Users.findOne({ facebookId: profile.id });
-      console.log('facebook', user);
+      // console.log('facebook', user);
 
       if (!user) {
         const user = await Users.create({
