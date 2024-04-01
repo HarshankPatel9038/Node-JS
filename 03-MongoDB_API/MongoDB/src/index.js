@@ -11,6 +11,7 @@ const YAML = require('yamljs');
 const routes = require('./routes/v1');
 const connectDB = require('./db');
 const connectPassport = require('./services/Provider');
+
 connectDB();
 
 const app = express();
