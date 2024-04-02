@@ -16,17 +16,21 @@ const connectSocketIO = () => {
     // socket.broadcast.emit("event-a", "msg Send"); // Send all exept itself
 
     socket.on("message", ({ room, message }) => {
-      console.log({ room, message });
-
-      io.to(room).emit("Recived Message", message)
+      io.to(room).emit("Recived Message", message);
     });
+
+    socket.on("createGroup", function (groupName, groupMessage) {
+      socket.join(groupName);
+      io.to(groupName).emit("groupMessage", groupMessage);
+    })
+
   });
 
 
   io.listen(8080
-  //   , () => {
-  //   console.log('SocketIO Server Stated In Port 8080')
-  // }
+    //   , () => {
+    //   console.log('SocketIO Server Stated In Port 8080')
+    // }
   );
 }
 

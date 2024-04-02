@@ -23,7 +23,6 @@ input {
   font-weight: 500;
   font-family: inherit;
   background-color: #efefef;
-  cursor: pointer;
   transition: all 400ms ease-in-out;
   -webkit-transition: all 400ms ease-in-out;
   -moz-transition: all 400ms ease-in-out;
@@ -36,6 +35,7 @@ button:hover {
 button:is(:hover, :active, :focus) {
   border: none;
   outline: none;
+  cursor: pointer;
 }
 .chat-wrapper {
   display: flex;
@@ -45,6 +45,14 @@ h1 {
   font-size: 35px;
   text-align: center;
   margin: 20px 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+  margin: 0 0 5px;
 }
 form {
   display: flex;
