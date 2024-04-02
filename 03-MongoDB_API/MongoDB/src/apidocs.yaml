@@ -2484,6 +2484,38 @@ paths:
                 type: array
                 items:
                   type: string
+  /order/seller/{userId}:
+    get:
+      tags:
+        - Order
+      summary: Returns a seller With Order By User Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          # description: The ID of the User to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
   /order/product/{productId}:
     get:
       tags:
@@ -2508,6 +2540,38 @@ paths:
           description: Authorization information is missing or invalid.
         "404":
           description: A product with the specified ID was not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /order/cancel/{orderId}:
+    put:
+      tags:
+        - Order
+      summary: Cancel Order By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          # description: The ID of the Order to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
         "5XX":
           description: Unexpected error.
           content:
@@ -2828,6 +2892,83 @@ paths:
                         type: number
                       quantity:
                         type: number
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /cart/delete-cart/{cartId}:
+    delete:
+      tags:
+        - Cart
+      summary: Delete Cart By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          # description: The ID of the Cart to Delete.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request.
+        "401":
+          description: Authorization information is missing or invalid.
+        "404":
+          description: not found.
+        "5XX":
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /cart/update-quantity/{cartId}:
+    put:
+      tags:
+        - Cart
+      summary: Update Cart Quantity By Id.
+      description: Type Your Description Here.
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          # description: The ID of the Cart to Update.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  product_id:
+                    type: number
+                  quantity:
+                    type: number
       responses:
         "200":
           description: OK

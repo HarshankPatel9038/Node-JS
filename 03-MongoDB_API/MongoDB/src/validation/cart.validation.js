@@ -20,8 +20,7 @@ const updateCart = {
 
 const deleteCart = {
   params: {
-    cartId: Joi.string().required().trim(),
-    productId: Joi.string().required().trim(),
+    cartId: Joi.string().required().trim()
   }
 };
 

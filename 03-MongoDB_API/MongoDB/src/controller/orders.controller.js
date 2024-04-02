@@ -153,7 +153,7 @@ const deleteOrder = async (req, res) => {
     if (!orderId) {
       return res.status(400).json({
         success: false,
-        message: 'Order Not Found'
+        message: 'Order Id Is Required'
       })
     }
 
@@ -236,6 +236,64 @@ const user = async (req, res) => {
 };
 
 
+const seller = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const convertIdInNumber = +userId;
+    const sellerOrder = await Orders.aggregate([
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'user_id',
+          foreignField: '_id',
+          as: 'users'
+        }
+      },
+      {
+        $unwind: {
+          path: '$users'
+        }
+      },
+      {
+        $match: {
+          $and: [
+            { 'users.role': { $eq: 'seller' } },
+            { 'user_id': { $eq: convertIdInNumber } }
+          ]
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          order_id: '$_id',
+          user_id: '$user_id',
+          user_name: '$users.name',
+          user_role: '$users.role'
+        }
+      }
+    ]);
+
+    if (!sellerOrder) {
+      return res.status(404).json({
+        success: false,
+        message: 'Seller Order not found'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: sellerOrder,
+      message: 'Seller Order By User Id'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
+
 const product = async (req, res) => {
   try {
     const productId = req.params.productId;
@@ -290,6 +348,43 @@ const product = async (req, res) => {
   }
 };
 
+const cancel = async (req, res) => {
+  try {
+    const orderId = req.params.orderId;
+    const convertIdInNumber = +orderId;
+
+    const order = await Orders.findById(convertIdInNumber);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order Not Found'
+      });
+    }
+
+    if (order.status === 'Completed') {
+      return res.status(400).json({
+        success: false,
+        message: 'Order cannot be cancelled because it is completed'
+      });
+    }
+
+    order.status = 'Cancelled';
+    await order.save();
+
+    return res.status(200).json({
+      success: true,
+      data: order,
+      message: 'Order cancelled successfully'
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
+};
+
 
 module.exports = {
   placeOrder,
@@ -298,5 +393,7 @@ module.exports = {
   updateOrder,
   deleteOrder,
   user,
-  product
+  seller,
+  product,
+  cancel
 }

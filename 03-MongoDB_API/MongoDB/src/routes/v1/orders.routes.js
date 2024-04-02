@@ -51,8 +51,16 @@ router.get('/user/:userId',
   orderController.user
 );
 
+router.get('/seller/:userId',
+  orderController.seller
+);
+
 router.get('/product/:productId',
   orderController.product
+);
+
+router.put('/cancel/:orderId',
+  orderController.cancel
 );
 
 module.exports = router;

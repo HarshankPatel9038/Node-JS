@@ -97,6 +97,10 @@ router.delete('/delete-user/:userId',
     userController.deleteUser
 );
 
+router.get('/search',
+    userController.search
+);
+
 router.get('/order/:userId',
     userController.order
 );

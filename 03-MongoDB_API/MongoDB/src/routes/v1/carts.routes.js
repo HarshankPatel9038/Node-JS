@@ -32,9 +32,13 @@ router.put('/update-cart/:cartId',
   cartController.updateCart
 );
 
-// router.delete('/deleteProductInCart/:cartId/:productId',
-//   validate(cartValidation.updateCart),
-//   cartController.updateCart
-// );
+router.delete('/delete-cart/:cartId',
+validate(cartValidation.deleteCart),
+  cartController.deleteCart
+);
+
+router.put('/update-quantity/:cartId',
+  cartController.updateQuantity
+);
 
 module.exports = router;
